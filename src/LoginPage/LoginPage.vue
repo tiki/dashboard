@@ -1,14 +1,21 @@
 <script setup lang="ts">
 import InputText from 'primevue/inputtext'
 import FloatLabel from 'primevue/floatlabel'
-import Password from 'primevue/password'
 import Button from 'primevue/button'
-import Image from 'primevue/image'
-
+import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
+const router = useRouter()
 const email = ref<string>()
 const password = ref<string>()
+
+const login = () => {
+  if (!email.value || !password.value) return alert('Please inform Email/Password')
+
+  sessionStorage.setItem('token', window.crypto.randomUUID())
+
+  router.push('/')
+}
 </script>
 
 <template>
@@ -34,7 +41,7 @@ const password = ref<string>()
           />
           <label for="password">Password</label>
         </FloatLabel>
-        <Button label="Login" severity="success" />
+        <Button label="Login" severity="success" @click="login()" />
       </div>
     </div>
     <div class="flex flex-col items-center justify-center w-2/3 bg-yellow-light hidden sm:flex">
