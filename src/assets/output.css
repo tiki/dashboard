@@ -599,6 +599,10 @@ video {
     visibility: visible;
   }
 
+  .fixed{
+    position: fixed;
+  }
+
   .m-0{
     margin: 0px;
   }
@@ -622,6 +626,14 @@ video {
 
   .mt-auto{
     margin-top: auto;
+  }
+
+  .ml-\[18rem\]{
+    margin-left: 18rem;
+  }
+
+  .ml-\[20rem\]{
+    margin-left: 20rem;
   }
 
   .flex{
