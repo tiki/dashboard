@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -28,3 +29,8 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+=======
+# IntelliJ
+*.iml
+.idea
+>>>>>>> main
