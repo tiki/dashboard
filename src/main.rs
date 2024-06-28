@@ -26,10 +26,14 @@ async fn main() -> Result<(), Error> {
     //     Err(e) => println!("Erro ao listar a issues: {}", e),
     // };
 
-    match github_client::create_issue_comment(token.to_owned(), owner.to_owned(), repo.to_owned(), "2".to_owned(), "this is an comment".to_owned()).await {
-    Ok(result) => println!("Resultado: {}", result),
-    Err(e) => println!("Erro ao listar a issues: {}", e),
-    };
+    // match github_client::create_issue_comment(token.to_owned(), owner.to_owned(), repo.to_owned(), "2".to_owned(), "this is an comment".to_owned()).await {
+    // Ok(result) => println!("Resultado: {}", result),
+    // Err(e) => println!("Erro ao listar a issues: {}", e),
+    // };
 
+    match github_client::get_issue_comment(token.to_owned(), owner.to_owned(), repo.to_owned(), "2".to_owned()).await {
+        Ok(result) => println!("Resultado: {}", result),
+        Err(e) => println!("Erro ao listar a issues: {}", e),
+        };
     Ok(())
 }
