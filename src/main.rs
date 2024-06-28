@@ -16,15 +16,15 @@ async fn main() -> Result<(), Error> {
     let owner = "";
     let repo = "";
 
-    // let results = s3::getFileList("/".to_owned());
-    // match github_client::create_issue("aaa".to_owned()).await {
-    //     Ok(result) => println!("Resultado: {}", result),
-    //     Err(e) => println!("Erro ao criar a issue: {}", e),
-    // };
-    match github_client::list_repositories(token.to_owned(), owner.to_owned(), repo.to_owned()).await {
+    let results = s3::getFileList("/".to_owned());
+    match github_client::create_issue(token.to_owned(), owner.to_owned(), repo.to_owned()).await {
         Ok(result) => println!("Resultado: {}", result),
-        Err(e) => println!("Erro ao listar a issues: {}", e),
+        Err(e) => println!("Erro ao criar a issue: {}", e),
     };
+    // match github_client::list_repositories(token.to_owned(), owner.to_owned(), repo.to_owned()).await {
+    //     Ok(result) => println!("Resultado: {}", result),
+    //     Err(e) => println!("Erro ao listar a issues: {}", e),
+    // };
 
     Ok(())
 }
