@@ -6,7 +6,7 @@ use reqwest::header::{HeaderMap, HeaderName, HeaderValue, ACCEPT, AUTHORIZATION,
 use serde_json::json;
 
 
-pub async fn create_issue(bearer_token: String,  owner: String, repo: String, title: String, body: String, assignees: String, labels: String, milestone: Option<String>) -> Result<String, reqwest::Error> {
+pub async fn create_issue(bearer_token: String,  owner: String, repo: String, title: String, body: String, assignees: Vec<String>, labels: String, milestone: Option<String>) -> Result<String, reqwest::Error> {
   dotenv::dotenv().ok();
 
   let auth_token: String = format!("Bearer {}", bearer_token);
@@ -33,9 +33,9 @@ pub async fn create_issue(bearer_token: String,  owner: String, repo: String, ti
   let body = json!({
     "title": title,
     "body": body,
-    "assignees": [
+    "assignees": 
       assignees
-    ],
+    ,
     "milestone": milestone,
     "labels": [
       labels
