@@ -6,7 +6,7 @@ use reqwest::header::{HeaderMap, HeaderName, HeaderValue, ACCEPT, AUTHORIZATION,
 use serde_json::json;
 
 
-pub async fn create_issue(bearer_token: String,  owner: String, repo: String, title: String, body: String, assignees: Vec<String>, labels: String, milestone: Option<String>) -> Result<String, reqwest::Error> {
+pub async fn create_issue(bearer_token: String,  owner: String, repo: String, title: String, body: String, assignees: Option<Vec<String>>, labels: String, milestone: Option<Vec<String>>) -> Result<String, reqwest::Error> {
   dotenv::dotenv().ok();
 
   let auth_token: String = format!("Bearer {}", bearer_token);
@@ -37,9 +37,8 @@ pub async fn create_issue(bearer_token: String,  owner: String, repo: String, ti
       assignees
     ,
     "milestone": milestone,
-    "labels": [
+    "labels": 
       labels
-    ]
     });
     
   let get_url = format!("https://api.github.com/repos/{}/{}/issues", owner, repo);
