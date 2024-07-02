@@ -1,14 +1,12 @@
 
 pub mod github_client {
 
-use std::env;
-
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue, ACCEPT, AUTHORIZATION, USER_AGENT};
 
 use serde_json::json;
 
 
-pub async fn create_issue(bearer_token: String,  owner: String, repo: String) -> Result<String, reqwest::Error> {
+pub async fn create_issue(bearer_token: String,  owner: String, repo: String, title: String, body: String, assignees: String, labels: String, milestone: Option<String>) -> Result<String, reqwest::Error> {
   dotenv::dotenv().ok();
 
   let auth_token: String = format!("Bearer {}", bearer_token);
@@ -33,14 +31,14 @@ pub async fn create_issue(bearer_token: String,  owner: String, repo: String) ->
     HeaderValue::from_static("2022-11-28"),
   );
   let body = json!({
-    "title": "Found a bug",
-    "body": "I\'m having a problem with this.",
+    "title": title,
+    "body": body,
     "assignees": [
-      "JesseMonteiro"
+      assignees
     ],
-    "milestone": null,
+    "milestone": milestone,
     "labels": [
-      "bug"
+      labels
     ]
     });
     
@@ -196,7 +194,6 @@ pub async fn create_issue(bearer_token: String,  owner: String, repo: String) ->
     );
   
     let body = json!({
-
       });
   
     let get_url = format!("https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}/comments");

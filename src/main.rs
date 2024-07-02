@@ -18,22 +18,22 @@ async fn main() -> Result<(), Error> {
 
     // let results = s3::getFileList("/".to_owned());
     // match github_client::create_issue(token.to_owned(), owner.to_owned(), repo.to_owned()).await {
-    //     Ok(result) => println!("Resultado: {}", result),
-    //     Err(e) => println!("Erro ao criar a issue: {}", e),
+    // Ok(result) => println!("Result: {}", result),
+    // Err(e) => println!("Error to list issues: {}", e),
     // };
     // match github_client::list_repositories(token.to_owned(), owner.to_owned(), repo.to_owned()).await {
-    //     Ok(result) => println!("Resultado: {}", result),
-    //     Err(e) => println!("Erro ao listar a issues: {}", e),
+    // Ok(result) => println!("Result: {}", result),
+    // Err(e) => println!("Error to list issues: {}", e),
     // };
 
     // match github_client::create_issue_comment(token.to_owned(), owner.to_owned(), repo.to_owned(), "2".to_owned(), "this is an comment".to_owned()).await {
-    // Ok(result) => println!("Resultado: {}", result),
-    // Err(e) => println!("Erro ao listar a issues: {}", e),
+    // Ok(result) => println!("Result: {}", result),
+    // Err(e) => println!("Error to list issues: {}", e),
     // };
 
     match github_client::get_issue_comment(token.to_owned(), owner.to_owned(), repo.to_owned(), "2".to_owned()).await {
-        Ok(result) => println!("Resultado: {}", result),
-        Err(e) => println!("Erro ao listar a issues: {}", e),
+        Ok(result) => println!("Result: {}", result),
+        Err(e) => println!("Error to list issues: {}", e),
         };
     Ok(())
 }
