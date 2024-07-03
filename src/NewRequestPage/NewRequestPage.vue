@@ -29,7 +29,7 @@ const cities = ref([
         class="w-full"
       />
       <FloatLabel>
-        <Textarea v-model="value" rows="5" cols="30" />
+        <Textarea rows="5" cols="30" />
         <label>Message</label>
       </FloatLabel>
       <Button label="Submit" severity="success" class="w-full" />

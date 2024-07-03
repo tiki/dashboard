@@ -4,8 +4,8 @@ import Avatar from 'primevue/avatar'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-const route = useRoute()
-const shouldShowSidebar = computed(() => route.meta.sidebar !== false)
+const currentRoute = useRoute()
+const shouldShowSidebar = computed(() => currentRoute.meta.sidebar !== false)
 
 const navigationList = [
   {
@@ -78,7 +78,10 @@ const navigationList = [
               <ul class="list-none p-0 m-0 overflow-hidden" v-for="route in section.children">
                 <li>
                   <router-link :to="`/${route.route}`">
-                    <a class="flex items-center cursor-pointer p-2 rounded hover:bg-white">
+                    <a
+                      class="flex items-center cursor-pointer p-2 rounded hover:bg-white"
+                      :class="currentRoute.name == route.name ? 'bg-white' : ''"
+                    >
                       <i :class="route.icon"></i>
                       <span class="font-medium capitalize">{{ route.name }}</span>
                     </a>
