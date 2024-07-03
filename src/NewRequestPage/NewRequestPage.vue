@@ -19,7 +19,7 @@ const cities = ref([
 <template>
   <div class="ml-[20rem] flex justify-center items-center h-screen flex-col gap-4">
     <h1 class="text-3xl uppercase text-dark-blue font-bold">create a new request</h1>
-    <form @submit.prevent="submitForm" class="flex flex-col justify-center items-center gap-6">
+    <form class="flex flex-col justify-center items-center gap-6">
       <InputText placeholder="Title" class="w-full" />
       <Select
         v-model="selectedCity"

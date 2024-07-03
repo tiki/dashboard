@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '../LoginPage/LoginPage.vue'
 import HomePage from '../HomePage/HomePage.vue'
 import NewRequestPage from '../NewRequestPage/NewRequestPage.vue'
+import RequestsPage from '../RequestsPage/RequestsPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,11 @@ const router = createRouter({
           path: 'new-request',
           name: 'new request',
           component: NewRequestPage
+        },
+        {
+          path: 'requests',
+          name: 'my requests',
+          component: RequestsPage
         }
       ]
     },
