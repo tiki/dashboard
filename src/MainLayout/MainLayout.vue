@@ -1,13 +1,53 @@
 <script setup lang="ts">
 import Drawer from 'primevue/drawer'
-import Menu from 'primevue/menu'
 import Avatar from 'primevue/avatar'
-import { computed, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { PrimeIcons } from '@primevue/core/api'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const shouldShowSidebar = computed(() => route.meta.sidebar !== false)
+
+const navigationList = [
+  {
+    header: 'account',
+    children: [
+      {
+        name: 'organization',
+        icon: 'pi pi-user mr-2',
+        route: 'account/organization'
+      },
+      {
+        name: 'team',
+        icon: 'pi pi-users mr-2',
+        route: 'account/team'
+      },
+      {
+        name: 'billing',
+        icon: 'pi pi-receipt mr-2',
+        route: 'account/billing'
+      }
+    ]
+  },
+  {
+    header: 'data publishing',
+    children: []
+  },
+  {
+    header: 'messages',
+    children: [
+      {
+        name: 'my requests',
+        icon: 'pi pi-list mr-2',
+        route: 'messages/requests'
+      },
+      {
+        name: 'new request',
+        icon: 'pi pi-plus mr-2',
+        route: 'messages/new-request'
+      }
+    ]
+  }
+]
 </script>
 
 <template>
@@ -20,6 +60,7 @@ const shouldShowSidebar = computed(() => route.meta.sidebar !== false)
     :baseZIndex="0"
     :autoZIndex="false"
     pt:root:style="box-shadow: none; background-color: #FFF0BC;"
+    pt:mask:style="width: auto;"
   >
     <template #container="{ closeCallback }">
       <div class="flex flex-col h-full">
@@ -31,45 +72,19 @@ const shouldShowSidebar = computed(() => route.meta.sidebar !== false)
         </div>
 
         <div class="overflow-y-auto">
-          <ul class="list-none p-4 m-0">
-            <li>
-              <span class="font-bold">ACCOUNT</span>
-              <ul class="list-none p-0 m-0 overflow-hidden">
+          <ul class="list-none p-4 m-0" v-for="section in navigationList">
+            <li class="py-2">
+              <span class="font-bold uppercase">{{ section.header }}</span>
+              <ul class="list-none p-0 m-0 overflow-hidden" v-for="route in section.children">
                 <li>
-                  <router-link to="/organization">
-                    <a class="flex items-center cursor-pointer p-4 rounded hover:bg-white">
-                      <i class="pi pi-user mr-2"></i>
-                      <span class="font-medium">Organization</span>
-                    </a>
-                  </router-link>
-                </li>
-                <li>
-                  <router-link to="/team">
-                    <a class="flex items-center cursor-pointer p-4 rounded hover:bg-white">
-                      <i class="pi pi-users mr-2"></i>
-                      <span class="font-medium">Team</span>
-                    </a>
-                  </router-link>
-                </li>
-                <li>
-                  <router-link to="/billing">
-                    <a class="flex items-center cursor-pointer p-4 rounded hover:bg-white">
-                      <i class="pi pi-receipt mr-2"></i>
-                      <span class="font-medium">Billing</span>
+                  <router-link :to="`/${route.route}`">
+                    <a class="flex items-center cursor-pointer p-2 rounded hover:bg-white">
+                      <i :class="route.icon"></i>
+                      <span class="font-medium capitalize">{{ route.name }}</span>
                     </a>
                   </router-link>
                 </li>
               </ul>
-            </li>
-          </ul>
-          <ul class="list-none p-4 m-0">
-            <li>
-              <span class="font-bold">DATA PUBLISHING</span>
-            </li>
-          </ul>
-          <ul class="list-none p-4 m-0">
-            <li>
-              <span class="font-bold">MESSAGES</span>
             </li>
           </ul>
         </div>
@@ -89,4 +104,8 @@ const shouldShowSidebar = computed(() => route.meta.sidebar !== false)
   </Drawer>
 </template>
 
-<style scoped></style>
+<style>
+.p-drawer-mask .p-drawer-open .p-drawer-left {
+  width: auto !important;
+}
+</style>
