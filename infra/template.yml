@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: Dashboard static hosting
+Parameters:
+  DNSZone:
+    Type: String
+    Description: The Route 53 Hosted Zone Id to use for the Dashboard. First create and register a hosted zone with parent DNS.
+  HostName:
+    Type: String
+    Description: The domain name for the Dashboard. This must be a subdomain of the hosted DNS zone.
+Resources:

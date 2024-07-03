@@ -24,7 +24,7 @@ const login = () => {
       <img src="../assets/images/tiki-logo.svg" alt="" class="sm:hidden" width="150" />
       <div class="px-6 text-center">
         <h1 class="text-3xl">Welcome to Tiki Dashboard</h1>
-        <h2 class="text-tiki-gray">Manage your data in a easy way</h2>
+        <h2 class="text-tiki-gray">Manage your data in an easy way</h2>
       </div>
       <div class="flex flex-col gap-6 w-1/2">
         <FloatLabel>

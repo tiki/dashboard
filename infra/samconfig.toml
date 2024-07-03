@@ -1,0 +1,15 @@
+version = 0.1
+
+[default.global.parameters]
+stack_name = "mytiki-dashboard-hosting"
+s3_bucket = "mytiki-sam-deploy-sandbox-ricardo-us-east-2"
+s3_prefix = "dashboard/hosting"
+region = "us-east-1"
+template_file = "out/template.yml"
+
+[default.deploy.parameters]
+confirm_changeset = false
+capabilities = [
+    "CAPABILITY_AUTO_EXPAND",
+    "CAPABILITY_NAMED_IAM",
+]
