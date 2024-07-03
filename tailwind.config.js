@@ -7,7 +7,8 @@ module.exports = {
       },
       colors: {
         'yellow-light': '#FFF0BC',
-        'tiki-gray': '#505C59'
+        'tiki-gray': '#505C59',
+        'dark-blue': '#334155'
       }
     }
   },
