@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { FilterMatchMode } from '@primevue/core/api'
 import IconField from 'primevue/iconfield'
@@ -8,8 +8,11 @@ import InputText from 'primevue/inputtext'
 import Tag from 'primevue/tag'
 import Select from 'primevue/select'
 import Column from 'primevue/column'
+import { useRouter } from 'vue-router'
 
-const data = ref([])
+const router = useRouter()
+
+const data = ref()
 const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
@@ -27,24 +30,24 @@ onMounted(() => {
 
 const getMockData = () => {
   return [
-    { title: 'Issue with login', lastRepliedBy: 'Amy Elsner', status: 'open' },
-    { title: 'Payment not processed', lastRepliedBy: 'Anna Fali', status: 'closed' },
-    { title: 'Bug in the system', lastRepliedBy: 'Asiya Javayant', status: 'pending' },
-    { title: 'Feature request', lastRepliedBy: 'Bernardo Dominic', status: 'open' },
-    { title: 'UI not responsive', lastRepliedBy: 'Elwin Sharvill', status: 'closed' },
-    { title: 'Error 404 on dashboard', lastRepliedBy: 'Ioni Bowcher', status: 'pending' },
-    { title: 'Slow performance', lastRepliedBy: 'Ivan Magalhaes', status: 'open' },
-    { title: 'Missing documentation', lastRepliedBy: 'Onyama Limba', status: 'closed' },
-    { title: 'Crash on save', lastRepliedBy: 'Stephen Shaw', status: 'pending' },
-    { title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
-    { title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
-    { title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
-    { title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
-    { title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' }
+    { id: 1, title: 'Issue with login', lastRepliedBy: 'Amy Elsner', status: 'open' },
+    { id: 2, title: 'Payment not processed', lastRepliedBy: 'Anna Fali', status: 'closed' },
+    { id: 3, title: 'Bug in the system', lastRepliedBy: 'Asiya Javayant', status: 'pending' },
+    { id: 4, title: 'Feature request', lastRepliedBy: 'Bernardo Dominic', status: 'open' },
+    { id: 5, title: 'UI not responsive', lastRepliedBy: 'Elwin Sharvill', status: 'closed' },
+    { id: 6, title: 'Error 404 on dashboard', lastRepliedBy: 'Ioni Bowcher', status: 'pending' },
+    { id: 7, title: 'Slow performance', lastRepliedBy: 'Ivan Magalhaes', status: 'open' },
+    { id: 8, title: 'Missing documentation', lastRepliedBy: 'Onyama Limba', status: 'closed' },
+    { id: 9, title: 'Crash on save', lastRepliedBy: 'Stephen Shaw', status: 'pending' },
+    { id: 10, title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
+    { id: 11, title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
+    { id: 12, title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
+    { id: 13, title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
+    { id: 14, title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' }
   ]
 }
 
-const getSeverity = (status) => {
+const getSeverity = (status: any) => {
   switch (status) {
     case 'open':
       return 'info'
@@ -53,6 +56,10 @@ const getSeverity = (status) => {
     case 'pending':
       return 'warn'
   }
+}
+
+const openThread = (event: any) => {
+  router.push(`request/${event.data.id}`)
 }
 </script>
 
@@ -67,6 +74,8 @@ const getSeverity = (status) => {
       filterDisplay="row"
       :loading="loading"
       :globalFilterFields="['title', 'lastRepliedBy', 'status']"
+      :rowHover="true"
+      @row-click="openThread"
     >
       <template #header>
         <div class="flex">
@@ -131,3 +140,9 @@ const getSeverity = (status) => {
     </DataTable>
   </div>
 </template>
+
+<style>
+.p-datatable-tbody td {
+  cursor: pointer;
+}
+</style>
