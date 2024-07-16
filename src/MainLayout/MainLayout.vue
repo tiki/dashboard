@@ -30,7 +30,13 @@ const navigationList = [
   },
   {
     header: 'data publishing',
-    children: []
+    children: [
+      {
+        name: 'datasets',
+        icon: 'pi pi-database mr-2',
+        route: 'data-publishing/datasets'
+      }
+    ]
   },
   {
     header: 'messages',

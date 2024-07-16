@@ -628,8 +628,16 @@ video {
     margin-top: auto;
   }
 
+  .mr-10{
+    margin-right: 2.5rem;
+  }
+
   .flex{
     display: flex;
+  }
+
+  .table{
+    display: table;
   }
 
   .hidden{

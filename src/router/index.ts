@@ -4,6 +4,7 @@ import HomePage from '../HomePage/HomePage.vue'
 import NewRequestPage from '../NewRequestPage/NewRequestPage.vue'
 import RequestsPage from '../RequestsPage/RequestsPage.vue'
 import ThreadPage from '../ThreadPage/ThreadPage.vue'
+import DatasetsPage from '../DatasetsPage/DatasetsPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,17 @@ const router = createRouter({
           path: 'request/:id',
           name: 'request',
           component: ThreadPage
+        }
+      ]
+    },
+    {
+      path: '/data-publishing',
+      name: 'data publishing',
+      children: [
+        {
+          path: 'datasets',
+          name: 'datasets',
+          component: DatasetsPage
         }
       ]
     },
