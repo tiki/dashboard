@@ -59,14 +59,14 @@ const navigationList = [
     :showCloseIcon="false"
     :baseZIndex="0"
     :autoZIndex="false"
-    pt:root:style="box-shadow: none; background-color: #FFF0BC;"
+    pt:root:style="box-shadow: none;"
     pt:mask:style="width: auto;"
   >
     <template #container="{ closeCallback }">
       <div class="flex flex-col h-full">
         <div class="flex items-center px-6 pt-4 shrink-0 w-full">
           <span class="flex items-center gap-2 w-full justify-center">
-            <img src="../assets/images/tiki-logo-2.svg" alt="" />
+            <img src="../assets/images/tiki-logo-2.svg" alt="" class="w-1/12" />
             <span class="font-semibold text-2xl text-primary">TIKI</span>
           </span>
         </div>
@@ -79,8 +79,10 @@ const navigationList = [
                 <li>
                   <router-link :to="`/${route.route}`">
                     <a
-                      class="flex items-center cursor-pointer p-2 rounded hover:bg-white"
-                      :class="currentRoute.name == route.name ? 'bg-white' : ''"
+                      class="flex items-center cursor-pointer p-2 rounded hover:bg-tiki-green/10"
+                      :class="
+                        currentRoute.name == route.name ? 'bg-tiki-green/10 text-tiki-green' : ''
+                      "
                     >
                       <i :class="route.icon"></i>
                       <span class="font-medium capitalize">{{ route.name }}</span>
@@ -93,7 +95,7 @@ const navigationList = [
         </div>
 
         <div class="mt-auto">
-          <hr class="mb-4 mx-4 border-t border-2 border-white" />
+          <hr class="mb-4 mx-4 border-t border border-tiki-green/20" />
           <a class="m-4 flex items-center cursor-pointer p-4 gap-2 rounded">
             <Avatar
               image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"

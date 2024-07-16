@@ -8,7 +8,7 @@ import RequestsTable from './RequestsTable.vue'
     <div class="flex justify-between items-center">
       <h1 class="text-3xl uppercase text-dark-blue font-bold">My Requests</h1>
       <router-link :to="`/messages/new-request`">
-        <Button label="New Requests" severity="success" class="" />
+        <Button label="New Request" severity="success" class="" />
       </router-link>
     </div>
     <Requests-Table />

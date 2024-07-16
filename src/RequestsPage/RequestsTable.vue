@@ -50,11 +50,11 @@ const getMockData = () => {
 const getSeverity = (status: any) => {
   switch (status) {
     case 'open':
-      return 'info'
-    case 'closed':
       return 'success'
+    case 'closed':
+      return 'secondary'
     case 'pending':
-      return 'warn'
+      return 'secondary'
   }
 }
 
