@@ -14,13 +14,9 @@ const router = useRouter()
 
 const data = ref()
 const filters = ref({
-  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  lastRepliedBy: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  status: { value: null, matchMode: FilterMatchMode.EQUALS }
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS }
 })
 
-const statuses = ref(['open', 'closed', 'pending'])
 const loading = ref(true)
 
 onMounted(() => {
@@ -64,81 +60,48 @@ const openThread = (event: any) => {
 </script>
 
 <template>
-  <div class="card">
-    <DataTable
-      v-model:filters="filters"
-      :value="data"
-      paginator
-      :rows="10"
-      dataKey="title"
-      filterDisplay="row"
-      :loading="loading"
-      :globalFilterFields="['title', 'lastRepliedBy', 'status']"
-      :rowHover="true"
-      @row-click="openThread"
-    >
-      <template #header>
-        <div class="flex">
-          <IconField>
-            <InputIcon>
-              <i class="pi pi-search" />
-            </InputIcon>
-            <InputText v-model="filters['global'].value" placeholder="Keyword Search" />
-          </IconField>
-        </div>
+  <DataTable
+    v-model:filters="filters"
+    :value="data"
+    paginator
+    :rows="5"
+    dataKey="title"
+    :loading="loading"
+    :globalFilterFields="['title', 'lastRepliedBy', 'status']"
+    :rowHover="true"
+    @row-click="openThread"
+  >
+    <template #header>
+      <div class="flex py-4 w-full">
+        <IconField class="w-full">
+          <InputIcon class="w-[12rem]">
+            <i class="pi pi-search" />
+          </InputIcon>
+          <InputText v-model="filters['global'].value" placeholder="Search..." class="w-2/6" />
+        </IconField>
+      </div>
+    </template>
+    <template #empty> No items found. </template>
+    <template #loading> Loading data. Please wait. </template>
+
+    <Column field="title" header="TITLE">
+      <template #body="{ data }">
+        {{ data.title }}
       </template>
-      <template #empty> No items found. </template>
-      <template #loading> Loading data. Please wait. </template>
+    </Column>
 
-      <Column field="title" header="Title" style="min-width: 12rem">
-        <template #body="{ data }">
-          {{ data.title }}
-        </template>
-        <template #filter="{ filterModel, filterCallback }">
-          <InputText
-            v-model="filterModel.value"
-            type="text"
-            @input="filterCallback()"
-            placeholder="Search by title"
-          />
-        </template>
-      </Column>
+    <Column field="lastRepliedBy" header="LAST REPLIED BY">
+      <template #body="{ data }">
+        {{ data.lastRepliedBy }}
+      </template>
+    </Column>
 
-      <Column field="lastRepliedBy" header="Last Replied By" style="min-width: 12rem">
-        <template #body="{ data }">
-          {{ data.lastRepliedBy }}
-        </template>
-        <template #filter="{ filterModel, filterCallback }">
-          <InputText
-            v-model="filterModel.value"
-            type="text"
-            @input="filterCallback()"
-            placeholder="Search by name"
-          />
-        </template>
-      </Column>
-
-      <Column field="status" header="Status" :showFilterMenu="false" style="min-width: 12rem">
-        <template #body="{ data }">
-          <Tag :value="data.status" :severity="getSeverity(data.status)" />
-        </template>
-        <template #filter="{ filterModel, filterCallback }">
-          <Select
-            v-model="filterModel.value"
-            @change="filterCallback()"
-            :options="statuses"
-            placeholder="Select One"
-            style="min-width: 12rem"
-            :showClear="true"
-          >
-            <template #option="slotProps">
-              <Tag :value="slotProps.option" :severity="getSeverity(slotProps.option)" />
-            </template>
-          </Select>
-        </template>
-      </Column>
-    </DataTable>
-  </div>
+    <Column field="status" header="STATUS" :showFilterMenu="false">
+      <template #body="{ data }">
+        <Tag :value="data.status" :severity="getSeverity(data.status)" />
+      </template>
+    </Column>
+  </DataTable>
 </template>
 
 <style>
