@@ -74,7 +74,7 @@ const openThread = (event: any) => {
     <template #header>
       <div class="flex py-4 w-full">
         <IconField class="w-full">
-          <InputIcon class="w-[12rem]">
+          <InputIcon>
             <i class="pi pi-search" />
           </InputIcon>
           <InputText v-model="filters['global'].value" placeholder="Search..." class="w-2/6" />
@@ -84,19 +84,19 @@ const openThread = (event: any) => {
     <template #empty> No items found. </template>
     <template #loading> Loading data. Please wait. </template>
 
-    <Column field="title" header="TITLE">
+    <Column field="title" header="TITLE" style="min-width: 10em">
       <template #body="{ data }">
         {{ data.title }}
       </template>
     </Column>
 
-    <Column field="lastRepliedBy" header="LAST REPLIED BY">
+    <Column field="lastRepliedBy" header="LAST REPLIED BY" style="min-width: 10em">
       <template #body="{ data }">
         {{ data.lastRepliedBy }}
       </template>
     </Column>
 
-    <Column field="status" header="STATUS" :showFilterMenu="false">
+    <Column field="status" header="STATUS" :showFilterMenu="false" style="min-width: 10em">
       <template #body="{ data }">
         <Tag :value="data.status" :severity="getSeverity(data.status)" />
       </template>

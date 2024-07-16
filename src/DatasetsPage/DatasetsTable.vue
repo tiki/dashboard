@@ -78,71 +78,40 @@ const getSeverity = (status: any) => {
       paginator
       :rows="10"
       dataKey="title"
-      filterDisplay="row"
       :loading="loading"
       :globalFilterFields="['table', 'dataset', 'status']"
     >
       <template #header>
-        <div class="flex">
-          <IconField>
+        <div class="flex py-4 w-full">
+          <IconField class="w-full">
             <InputIcon>
               <i class="pi pi-search" />
             </InputIcon>
-            <InputText v-model="filters['global'].value" placeholder="Keyword Search" />
+            <InputText v-model="filters['global'].value" placeholder="Search..." class="w-2/6" />
           </IconField>
         </div>
       </template>
       <template #empty> No items found. </template>
       <template #loading> Loading data. Please wait. </template>
 
-      <Column field="table" header="Table" style="min-width: 12rem">
+      <Column field="table" header="TABLE" style="min-width: 10rem">
         <template #body="{ data }">
           {{ data.table }}
         </template>
-        <template #filter="{ filterModel, filterCallback }">
-          <InputText
-            v-model="filterModel.value"
-            type="text"
-            @input="filterCallback()"
-            placeholder="Search by table"
-          />
-        </template>
       </Column>
 
-      <Column field="dataset" header="Dataset" style="min-width: 12rem">
+      <Column field="dataset" header="DATASET" style="min-width: 10rem">
         <template #body="{ data }">
           {{ data.dataset }}
         </template>
-        <template #filter="{ filterModel, filterCallback }">
-          <InputText
-            v-model="filterModel.value"
-            type="text"
-            @input="filterCallback()"
-            placeholder="Search by dataset"
-          />
-        </template>
       </Column>
 
-      <Column field="status" header="Status" :showFilterMenu="false" style="min-width: 12rem">
+      <Column field="status" header="STATUS" :showFilterMenu="false" style="min-width: 10em">
         <template #body="{ data }">
           <Tag :value="data.status" :severity="getSeverity(data.status)" />
         </template>
-        <template #filter="{ filterModel, filterCallback }">
-          <Select
-            v-model="filterModel.value"
-            @change="filterCallback()"
-            :options="statuses"
-            placeholder="Filter by status"
-            style="min-width: 12rem"
-            :showClear="true"
-          >
-            <template #option="slotProps">
-              <Tag :value="slotProps.option" :severity="getSeverity(slotProps.option)" />
-            </template>
-          </Select>
-        </template>
       </Column>
-      <Column field="lastUpdate" header="Last Update" style="min-width: 12rem" sortable>
+      <Column field="lastUpdate" header="LAST UPDATE" style="min-width: 10rem" sortable>
         <template #body="{ data }">
           {{ data.lastUpdate }}
         </template>
