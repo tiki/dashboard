@@ -70,7 +70,7 @@ const navigationList = [
   >
     <template #container="{ closeCallback }">
       <div class="flex flex-col h-full">
-        <div class="flex items-center px-6 pt-4 shrink-0 w-full">
+        <div class="flex items-center pt-4 shrink-0">
           <span class="flex items-center gap-2 w-full justify-center">
             <img src="../assets/images/tiki-logo-2.svg" alt="" class="w-1/12" />
             <span class="font-semibold text-2xl text-primary">TIKI</span>
@@ -78,7 +78,7 @@ const navigationList = [
         </div>
 
         <div class="overflow-y-auto">
-          <ul class="list-none p-4 m-0" v-for="section in navigationList">
+          <ul class="list-none px-4 py-2 m-0" v-for="section in navigationList">
             <li class="py-2">
               <span class="font-bold uppercase">{{ section.header }}</span>
               <ul class="list-none p-0 m-0 overflow-hidden" v-for="route in section.children">
@@ -101,7 +101,7 @@ const navigationList = [
         </div>
 
         <div class="mt-auto">
-          <hr class="mb-4 mx-4 border-t border border-tiki-green/20" />
+          <hr class="mb-4 mx-4 border-t border border-black/10" />
           <a class="m-4 flex items-center cursor-pointer p-4 gap-2 rounded">
             <Avatar
               image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
@@ -116,7 +116,11 @@ const navigationList = [
 </template>
 
 <style>
-.p-drawer-mask .p-drawer-open .p-drawer-left {
+.p-drawer-mask {
   width: auto !important;
+}
+
+.p-drawer-left .p-drawer {
+  width: 15rem;
 }
 </style>

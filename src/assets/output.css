@@ -628,8 +628,20 @@ video {
     margin-top: auto;
   }
 
-  .mr-10{
-    margin-right: 2.5rem;
+  .ml-\[15rem\]{
+    margin-left: 15rem;
+  }
+
+  .ml-\[10rem\]{
+    margin-left: 10rem;
+  }
+
+  .ml-\[12rem\]{
+    margin-left: 12rem;
+  }
+
+  .ml-auto{
+    margin-left: auto;
   }
 
   .flex{
@@ -652,6 +664,10 @@ video {
     height: 100vh;
   }
 
+  .w-1\/12{
+    width: 8.333333%;
+  }
+
   .w-1\/2{
     width: 50%;
   }
@@ -668,18 +684,6 @@ video {
     width: 100%;
   }
 
-  .w-1\/4{
-    width: 25%;
-  }
-
-  .w-1\/12{
-    width: 8.333333%;
-  }
-
-  .w-2\/12{
-    width: 16.666667%;
-  }
-
   .shrink-0{
     flex-shrink: 0;
   }
@@ -694,6 +698,10 @@ video {
 
   .flex-col{
     flex-direction: column;
+  }
+
+  .items-start{
+    align-items: flex-start;
   }
 
   .items-center{
@@ -744,10 +752,6 @@ video {
     border-width: 1px;
   }
 
-  .border-2{
-    border-width: 2px;
-  }
-
   .border-t{
     border-top-width: 1px;
   }
@@ -756,35 +760,21 @@ video {
     border-style: solid;
   }
 
+  .border-black\/10{
+    border-color: rgb(0 0 0 / 0.1);
+  }
+
   .border-black\/20{
     border-color: rgb(0 0 0 / 0.2);
   }
 
-  .border-white{
-    --tw-border-opacity: 1;
-    border-color: rgb(255 255 255 / var(--tw-border-opacity));
-  }
-
-  .border-tiki-green{
-    --tw-border-opacity: 1;
-    border-color: rgb(0 178 114 / var(--tw-border-opacity));
-  }
-
-  .border-tiki-green\/20{
-    border-color: rgb(0 178 114 / 0.2);
-  }
-
-  .bg-tiki-green\/20{
-    background-color: rgb(0 178 114 / 0.2);
+  .bg-tiki-green\/10{
+    background-color: rgb(0 178 114 / 0.1);
   }
 
   .bg-yellow-light{
     --tw-bg-opacity: 1;
     background-color: rgb(255 240 188 / var(--tw-bg-opacity));
-  }
-
-  .bg-tiki-green\/10{
-    background-color: rgb(0 178 114 / 0.1);
   }
 
   .p-0{
@@ -804,6 +794,11 @@ video {
     padding-right: 4rem;
   }
 
+  .px-4{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .px-6{
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -817,6 +812,21 @@ video {
   .py-2{
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+  }
+
+  .px-2{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .px-1{
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  .px-3{
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 
   .pl-2{
@@ -884,10 +894,6 @@ video {
   .filter{
     filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
   }
-}
-
-.hover\:bg-tiki-green\/20:hover{
-  background-color: rgb(0 178 114 / 0.2);
 }
 
 .hover\:bg-tiki-green\/10:hover{

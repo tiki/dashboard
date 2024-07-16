@@ -39,14 +39,14 @@ const sendNewMessage = () => {
     id: messages.value.length + 1,
     author: 'Miro Benício',
     photo: 'https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png',
-    content: newMessage.value
+    content: newMessage.value!
   })
   newMessage.value = ''
 }
 </script>
 
 <template>
-  <div class="ml-[20rem] flex justify-start items-between h-screen flex-col gap-4 py-10 px-16">
+  <div class="ml-[12rem] flex justify-start items-between h-screen flex-col gap-4 py-10 px-16">
     <div class="flex justify-between items-center">
       <h1 class="text-3xl uppercase text-dark-blue font-bold">Request #{{ requestId }}</h1>
       <router-link :to="`/messages/requests`">
