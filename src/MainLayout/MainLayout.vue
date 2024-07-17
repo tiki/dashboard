@@ -78,7 +78,7 @@ const navigationList = [
         </div>
 
         <div class="overflow-y-auto flex flex-col gap-6">
-          <ul class="list-none px-4 m-0" v-for="section in navigationList">
+          <ul class="list-none px-8 m-0" v-for="section in navigationList">
             <li class="">
               <span class="font-bold uppercase">{{ section.header }}</span>
               <ul class="list-none p-0 m-0 overflow-hidden" v-for="route in section.children">
@@ -101,8 +101,8 @@ const navigationList = [
         </div>
 
         <div class="mt-auto">
-          <hr class="mb-4 mx-4 border-t border border-black/10" />
-          <a class="m-4 flex items-center cursor-pointer p-4 gap-2 rounded">
+          <hr class="border-t border border-black/10" />
+          <a class="flex items-center justify-start cursor-pointer p-6 gap-2 rounded">
             <Avatar
               image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
               shape="circle"

@@ -607,6 +607,10 @@ video {
     margin: 1rem;
   }
 
+  .m-2{
+    margin: 0.5rem;
+  }
+
   .mx-4{
     margin-left: 1rem;
     margin-right: 1rem;
@@ -782,6 +786,10 @@ video {
     padding: 1rem;
   }
 
+  .p-6{
+    padding: 1.5rem;
+  }
+
   .px-16{
     padding-left: 4rem;
     padding-right: 4rem;
@@ -810,6 +818,26 @@ video {
   .py-4{
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .py-2{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .px-10{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .px-7{
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
   }
 
   .pl-2{
