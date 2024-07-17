@@ -616,8 +616,12 @@ video {
     margin-bottom: 1rem;
   }
 
-  .ml-\[20rem\]{
-    margin-left: 20rem;
+  .ml-\[12rem\]{
+    margin-left: 12rem;
+  }
+
+  .ml-\[15rem\]{
+    margin-left: 15rem;
   }
 
   .mr-2{
@@ -626,22 +630,6 @@ video {
 
   .mt-auto{
     margin-top: auto;
-  }
-
-  .ml-\[15rem\]{
-    margin-left: 15rem;
-  }
-
-  .ml-\[10rem\]{
-    margin-left: 10rem;
-  }
-
-  .ml-\[12rem\]{
-    margin-left: 12rem;
-  }
-
-  .ml-auto{
-    margin-left: auto;
   }
 
   .flex{
@@ -680,28 +668,12 @@ video {
     width: 66.666667%;
   }
 
-  .w-full{
-    width: 100%;
-  }
-
-  .w-\[12rem\]{
-    width: 12rem;
-  }
-
-  .w-1\/4{
-    width: 25%;
-  }
-
-  .w-2\/4{
-    width: 50%;
-  }
-
-  .w-3\/4{
-    width: 75%;
-  }
-
   .w-2\/6{
     width: 33.333333%;
+  }
+
+  .w-full{
+    width: 100%;
   }
 
   .shrink-0{
@@ -718,10 +690,6 @@ video {
 
   .flex-col{
     flex-direction: column;
-  }
-
-  .items-start{
-    align-items: flex-start;
   }
 
   .items-center{
@@ -750,6 +718,10 @@ video {
 
   .gap-6{
     gap: 1.5rem;
+  }
+
+  .gap-5{
+    gap: 1.25rem;
   }
 
   .overflow-hidden{
@@ -814,6 +786,11 @@ video {
     padding-right: 4rem;
   }
 
+  .px-3{
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
   .px-4{
     padding-left: 1rem;
     padding-right: 1rem;
@@ -834,21 +811,6 @@ video {
     padding-bottom: 0.5rem;
   }
 
-  .px-2{
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-
-  .px-1{
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-  }
-
-  .px-3{
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-
   .py-4{
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -859,12 +821,17 @@ video {
     padding-bottom: 1.5rem;
   }
 
+  .py-5{
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
   .pl-2{
     padding-left: 0.5rem;
   }
 
-  .pt-4{
-    padding-top: 1rem;
+  .pt-6{
+    padding-top: 1.5rem;
   }
 
   .text-center{
@@ -919,10 +886,6 @@ video {
   .text-tiki-green{
     --tw-text-opacity: 1;
     color: rgb(0 178 114 / var(--tw-text-opacity));
-  }
-
-  .filter{
-    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
   }
 }
 

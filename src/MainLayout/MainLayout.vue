@@ -69,17 +69,17 @@ const navigationList = [
     pt:mask:style="width: auto;"
   >
     <template #container="{ closeCallback }">
-      <div class="flex flex-col h-full">
-        <div class="flex items-center pt-4 shrink-0">
+      <div class="flex flex-col h-full gap-6">
+        <div class="flex items-center pt-6">
           <span class="flex items-center gap-2 w-full justify-center">
             <img src="../assets/images/tiki-logo-2.svg" alt="" class="w-1/12" />
             <span class="font-semibold text-2xl text-primary">TIKI</span>
           </span>
         </div>
 
-        <div class="overflow-y-auto">
-          <ul class="list-none px-4 py-2 m-0" v-for="section in navigationList">
-            <li class="py-2">
+        <div class="overflow-y-auto flex flex-col gap-6">
+          <ul class="list-none px-4 m-0" v-for="section in navigationList">
+            <li class="">
               <span class="font-bold uppercase">{{ section.header }}</span>
               <ul class="list-none p-0 m-0 overflow-hidden" v-for="route in section.children">
                 <li>
@@ -122,5 +122,10 @@ const navigationList = [
 
 .p-drawer-left .p-drawer {
   width: 15rem;
+}
+
+td,
+th {
+  padding: 1rem 1rem;
 }
 </style>
