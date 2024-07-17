@@ -69,8 +69,8 @@ const navigationList = [
     pt:mask:style="width: auto;"
   >
     <template #container="{ closeCallback }">
-      <div class="flex flex-col h-full gap-6">
-        <div class="flex items-center pt-6">
+      <div class="flex flex-col h-full gap-10">
+        <div class="flex items-center pt-10">
           <span class="flex items-center gap-2 w-full justify-center">
             <img src="../assets/images/tiki-logo-2.svg" alt="" class="w-1/12" />
             <span class="font-semibold text-2xl text-primary">TIKI</span>

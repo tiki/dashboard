@@ -17,7 +17,7 @@ const cities = ref([
 </script>
 
 <template>
-  <div class="ml-[15rem] flex justify-center items-center h-screen flex-col gap-4">
+  <div class="ml-[12rem] flex justify-center items-center h-screen flex-col gap-4">
     <h1 class="text-3xl uppercase text-dark-blue font-bold">create a new request</h1>
     <form class="flex flex-col justify-center items-center gap-6">
       <InputText placeholder="Title" class="w-full" />
@@ -32,7 +32,7 @@ const cities = ref([
         <Textarea rows="5" cols="30" />
         <label>Message</label>
       </FloatLabel>
-      <Button label="Submit" severity="success" class="w-full" />
+      <Button label="Submit" severity="success" class="w-full" style="background-color: #00b272" />
     </form>
   </div>
 </template>
