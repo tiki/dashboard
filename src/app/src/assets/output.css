@@ -599,16 +599,16 @@ video {
     visibility: visible;
   }
 
-  .fixed{
-    position: fixed;
-  }
-
   .m-0{
     margin: 0px;
   }
 
   .m-4{
     margin: 1rem;
+  }
+
+  .m-2{
+    margin: 0.5rem;
   }
 
   .mx-4{
@@ -620,6 +620,14 @@ video {
     margin-bottom: 1rem;
   }
 
+  .ml-\[12rem\]{
+    margin-left: 12rem;
+  }
+
+  .ml-\[15rem\]{
+    margin-left: 15rem;
+  }
+
   .mr-2{
     margin-right: 0.5rem;
   }
@@ -628,16 +636,12 @@ video {
     margin-top: auto;
   }
 
-  .ml-\[18rem\]{
-    margin-left: 18rem;
-  }
-
-  .ml-\[20rem\]{
-    margin-left: 20rem;
-  }
-
   .flex{
     display: flex;
+  }
+
+  .table{
+    display: table;
   }
 
   .hidden{
@@ -652,20 +656,28 @@ video {
     height: 100vh;
   }
 
+  .w-1\/12{
+    width: 8.333333%;
+  }
+
   .w-1\/2{
     width: 50%;
+  }
+
+  .w-11\/12{
+    width: 91.666667%;
   }
 
   .w-2\/3{
     width: 66.666667%;
   }
 
-  .w-full{
-    width: 100%;
+  .w-2\/6{
+    width: 33.333333%;
   }
 
-  .shrink-0{
-    flex-shrink: 0;
+  .w-full{
+    width: 100%;
   }
 
   .cursor-pointer{
@@ -684,12 +696,28 @@ video {
     align-items: center;
   }
 
+  .justify-start{
+    justify-content: flex-start;
+  }
+
   .justify-center{
     justify-content: center;
   }
 
+  .justify-between{
+    justify-content: space-between;
+  }
+
+  .gap-10{
+    gap: 2.5rem;
+  }
+
   .gap-2{
     gap: 0.5rem;
+  }
+
+  .gap-4{
+    gap: 1rem;
   }
 
   .gap-6{
@@ -708,12 +736,8 @@ video {
     border-radius: 0.25rem;
   }
 
-  .border-0{
-    border-width: 0px;
-  }
-
-  .border-2{
-    border-width: 2px;
+  .rounded-md{
+    border-radius: 0.375rem;
   }
 
   .border{
@@ -724,14 +748,20 @@ video {
     border-top-width: 1px;
   }
 
-  .border-white{
-    --tw-border-opacity: 1;
-    border-color: rgb(255 255 255 / var(--tw-border-opacity));
+  .border-solid{
+    border-style: solid;
   }
 
-  .border-black{
-    --tw-border-opacity: 1;
-    border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  .border-black\/10{
+    border-color: rgb(0 0 0 / 0.1);
+  }
+
+  .border-black\/20{
+    border-color: rgb(0 0 0 / 0.2);
+  }
+
+  .bg-tiki-green\/10{
+    background-color: rgb(0 178 114 / 0.1);
   }
 
   .bg-yellow-light{
@@ -739,12 +769,40 @@ video {
     background-color: rgb(255 240 188 / var(--tw-bg-opacity));
   }
 
+  .bg-tiki-green{
+    --tw-bg-opacity: 1;
+    background-color: rgb(0 178 114 / var(--tw-bg-opacity));
+  }
+
   .p-0{
     padding: 0px;
   }
 
+  .p-2{
+    padding: 0.5rem;
+  }
+
   .p-4{
     padding: 1rem;
+  }
+
+  .p-6{
+    padding: 1.5rem;
+  }
+
+  .px-16{
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .px-3{
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .px-4{
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .px-6{
@@ -752,8 +810,42 @@ video {
     padding-right: 1.5rem;
   }
 
-  .pt-4{
+  .py-10{
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .py-4{
     padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .py-2{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .px-10{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .px-7{
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+
+  .pl-2{
+    padding-left: 0.5rem;
+  }
+
+  .pt-10{
+    padding-top: 2.5rem;
   }
 
   .text-center{
@@ -770,6 +862,11 @@ video {
     line-height: 2.25rem;
   }
 
+  .text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
   .font-bold{
     font-weight: 700;
   }
@@ -782,30 +879,32 @@ video {
     font-weight: 600;
   }
 
+  .uppercase{
+    text-transform: uppercase;
+  }
+
+  .capitalize{
+    text-transform: capitalize;
+  }
+
+  .text-dark-blue{
+    --tw-text-opacity: 1;
+    color: rgb(51 65 85 / var(--tw-text-opacity));
+  }
+
   .text-tiki-gray{
     --tw-text-opacity: 1;
     color: rgb(80 92 89 / var(--tw-text-opacity));
   }
 
-  .text-white{
+  .text-tiki-green{
     --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-  }
-
-  .transition-colors{
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-  }
-
-  .duration-150{
-    transition-duration: 150ms;
+    color: rgb(0 178 114 / var(--tw-text-opacity));
   }
 }
 
-.hover\:bg-white:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+.hover\:bg-tiki-green\/10:hover{
+  background-color: rgb(0 178 114 / 0.1);
 }
 
 @media (min-width: 640px){
