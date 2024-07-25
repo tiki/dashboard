@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
-    "deploy": "npm install && npm run build-only && cp -r dist ./infra/out/src && aws s3 sync ./infra/out/src s3://${npm_config_bucket} --delete",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
