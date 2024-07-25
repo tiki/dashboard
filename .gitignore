@@ -19,6 +19,8 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
+.vite
+
 # Editor directories and files
 .vscode/*
 .idea
