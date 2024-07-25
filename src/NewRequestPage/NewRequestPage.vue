@@ -17,9 +17,9 @@ const cities = ref([
 </script>
 
 <template>
-  <div class="ml-[20rem] flex justify-center items-center h-screen flex-col gap-4">
+  <div class="ml-[12rem] flex justify-center items-center h-screen flex-col gap-4">
     <h1 class="text-3xl uppercase text-dark-blue font-bold">create a new request</h1>
-    <form @submit.prevent="submitForm" class="flex flex-col justify-center items-center gap-6">
+    <form class="flex flex-col justify-center items-center gap-6">
       <InputText placeholder="Title" class="w-full" />
       <Select
         v-model="selectedCity"
@@ -29,10 +29,10 @@ const cities = ref([
         class="w-full"
       />
       <FloatLabel>
-        <Textarea v-model="value" rows="5" cols="30" />
+        <Textarea rows="5" cols="30" />
         <label>Message</label>
       </FloatLabel>
-      <Button label="Submit" severity="success" class="w-full" />
+      <Button label="Submit" severity="success" class="w-full" style="background-color: #00b272" />
     </form>
   </div>
 </template>
