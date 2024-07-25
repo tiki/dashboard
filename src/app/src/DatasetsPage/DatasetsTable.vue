@@ -5,68 +5,28 @@ import IconField from 'primevue/iconfield'
 import InputIcon from 'primevue/inputicon'
 import DataTable from 'primevue/datatable'
 import InputText from 'primevue/inputtext'
-import Tag from 'primevue/tag'
-import Select from 'primevue/select'
 import Column from 'primevue/column'
 
 const data = ref()
 const filters = ref({
-  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  table: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  dataset: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  status: { value: null, matchMode: FilterMatchMode.EQUALS }
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS }
 })
-
-const statuses = ref(['uploaded', 'prepared', 'processed'])
 const loading = ref(true)
 
-onMounted(() => {
-  data.value = getMockData()
+onMounted(async () => {
+  data.value = await getDatasets()
   loading.value = false
 })
 
-const getMockData = () => {
-  return [
-    {
-      id: 1,
-      table: 'Ocean',
-      dataset: 'Receipts',
-      status: 'processed',
-      lastUpdate: '2024-07-15T12:00:00Z'
-    },
-    {
-      id: 2,
-      table: 'Lake',
-      dataset: 'Demographics',
-      status: 'uploaded',
-      lastUpdate: '2024-07-15T12:00:00Z'
-    },
-    {
-      id: 3,
-      table: 'River',
-      dataset: 'Transactions',
-      status: 'prepared',
-      lastUpdate: '2024-07-15T12:00:00Z'
-    },
-    {
-      id: 4,
-      table: 'Sea',
-      dataset: 'Retails',
-      status: 'processed',
-      lastUpdate: '2024-07-15T12:00:00Z'
-    }
-  ]
-}
-
-const getSeverity = (status: any) => {
-  switch (status) {
-    case 'processed':
-      return 'success'
-    case 'uploaded':
-      return 'secondary'
-    case 'prepared':
-      return 'secondary'
+const getDatasets = async () => {
+  const headers = new Headers()
+  headers.append('Access-Control-Allow-Origin', 'http://localhost:5173')
+  const options = {
+    method: 'GET',
+    headers: headers
   }
+  const data = await fetch(`${import.meta.env.VITE_API_URL}/dashboard/uploads`, options)
+  return await data.json()
 }
 </script>
 
@@ -100,20 +60,25 @@ const getSeverity = (status: any) => {
         </template>
       </Column>
 
-      <Column field="dataset" header="DATASET" style="min-width: 10rem">
+      <Column field="database" header="DATABASE" style="min-width: 10rem">
         <template #body="{ data }">
-          {{ data.dataset }}
+          {{ data.database }}
         </template>
       </Column>
 
-      <Column field="status" header="STATUS" :showFilterMenu="false" style="min-width: 10em">
+      <Column field="filename" header="FILENAME" :showFilterMenu="false" style="min-width: 10em">
         <template #body="{ data }">
-          <Tag :value="data.status" :severity="getSeverity(data.status)" />
+          {{ data.filename }}
         </template>
       </Column>
-      <Column field="lastUpdate" header="LAST UPDATE" style="min-width: 10rem" sortable>
+      <Column
+        field="uploaded_datetime"
+        header="UPLOADED DATETIME"
+        style="min-width: 10rem"
+        sortable
+      >
         <template #body="{ data }">
-          {{ data.lastUpdate }}
+          {{ data.uploaded_datetime }}
         </template>
       </Column>
     </DataTable>
