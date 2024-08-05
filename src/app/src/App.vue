@@ -2,11 +2,15 @@
 import { RouterView } from 'vue-router'
 import MainLayout from './MainLayout/MainLayout.vue'
 import { onMounted } from 'vue'
-import { setCookie } from '@/CookieService/index'
+import { setCookie, getCookie } from '@/CookieService/index'
 
 onMounted(() => {
   const queryString = window.location.search
   const urlParams = new URLSearchParams(queryString)
+
+  const accessTokenCookie = getCookie('access_token')
+
+  if (accessTokenCookie) return
 
   const idToken = urlParams.get('id_token')
   const accessToken = urlParams.get('access_token')
