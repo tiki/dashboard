@@ -1,0 +1,9 @@
+  NetworkSSLCertificate: 
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref HostName
+      DomainValidationOptions:
+        - DomainName: !Ref HostName
+          HostedZoneId: !Ref DNSZone
+      ValidationMethod: DNS
+  

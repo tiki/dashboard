@@ -1,7 +1,7 @@
 <script lang="ts" script></script>
 
 <template>
-  <div class="ml-[12rem]">
+  <div class="ml-[15rem]">
     <h1 class="text-3xl">home page</h1>
   </div>
 </template>

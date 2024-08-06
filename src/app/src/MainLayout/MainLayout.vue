@@ -8,26 +8,26 @@ const currentRoute = useRoute()
 const shouldShowSidebar = computed(() => currentRoute.meta.sidebar !== false)
 
 const navigationList = [
-  {
-    header: 'account',
-    children: [
-      {
-        name: 'organization',
-        icon: 'pi pi-user mr-2',
-        route: 'account/organization'
-      },
-      {
-        name: 'team',
-        icon: 'pi pi-users mr-2',
-        route: 'account/team'
-      },
-      {
-        name: 'billing',
-        icon: 'pi pi-receipt mr-2',
-        route: 'account/billing'
-      }
-    ]
-  },
+  // {
+  //   header: 'account',
+  //   children: [
+  //     {
+  //       name: 'organization',
+  //       icon: 'pi pi-user mr-2',
+  //       route: 'account/organization'
+  //     },
+  //     {
+  //       name: 'team',
+  //       icon: 'pi pi-users mr-2',
+  //       route: 'account/team'
+  //     },
+  //     {
+  //       name: 'billing',
+  //       icon: 'pi pi-receipt mr-2',
+  //       route: 'account/billing'
+  //     }
+  //   ]
+  // },
   {
     header: 'data publishing',
     children: [
