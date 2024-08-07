@@ -1,0 +1,38 @@
+name: "Release"
+
+on:
+  workflow_dispatch:
+    inputs:
+      VERSION:
+        description: 'Release version in semver format'
+        required: true
+
+env:
+  AWS_REGION: "us-east-2"
+
+jobs:
+  copy_files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositório
+        uses: actions/checkout@v2
+
+      - name: Configurar AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Assume Artifacts Role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ARTIFACTS_ID }}:role/CopyStaticSite
+          aws-region: ${{ env.AWS_REGION }}
+          mask-aws-account-id: true
+          role-chaining: true
+
+      - name: Copy Static Site
+        run: |
+          aws s3 sync s3://tiki-artifacts-catalog/dashboard/${{ github.event.inputs.VERSION }} s3://tiki-dashboard-site --recursive

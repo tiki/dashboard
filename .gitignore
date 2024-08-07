@@ -20,7 +20,7 @@ coverage
 /cypress/screenshots/
 
 .vite
-
+out
 # Editor directories and files
 .vscode/*
 .idea

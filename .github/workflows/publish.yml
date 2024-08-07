@@ -1,0 +1,75 @@
+name: "Publish"
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  AWS_REGION: "us-east-2"
+  PRODUCT_ID: ""
+
+jobs:
+  Publish:
+    runs-on: ubuntu-latest
+    environment: Production
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assume OIDC Role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_IDENTITY_ID }}:role/GitHubOidc
+          aws-region: ${{ env.AWS_REGION }}
+          mask-aws-account-id: true
+
+      - name: Assume Artifacts Role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ARTIFACTS_ID }}:role/GitHubCatalogPublish
+          aws-region: ${{ env.AWS_REGION }}
+          mask-aws-account-id: true
+          role-chaining: true
+
+      - name: Get Version
+        id: semver
+        uses: ietf-tools/semver-action@v1
+        with:
+          token: ${{ github.token }}
+          branch: main
+
+      - name: Publish Application
+        run: make publish VERSION=${{ steps.semver.outputs.nextStrict }} PRODUCT_ID=${{ env.PRODUCT_ID }}
+
+  Release:
+    needs: Publish
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get Version
+        id: semver
+        uses: ietf-tools/semver-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+
+      - name: Create Tag
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag -a ${{ steps.semver.outputs.nextStrict }} -m "Release ${{ steps.semver.outputs.nextStrict }}"
+          git push origin ${{ steps.semver.outputs.nextStrict }}
+
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ steps.semver.outputs.nextStrict }} \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="${GITHUB_REPOSITORY#*/} ${{ steps.semver.outputs.nextStrict }}" \
+              --generate-notes

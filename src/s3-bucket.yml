@@ -1,7 +1,7 @@
   StaticSiteBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub '${HostName}-dashboard-site'
+      BucketName: tiki-dashboard-site'
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
