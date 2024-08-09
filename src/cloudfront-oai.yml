@@ -1,0 +1,5 @@
+CloudFrontOAI:
+  Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+  Properties:
+    CloudFrontOriginAccessIdentityConfig:
+      Comment: !Sub 'OAI for Dashboard'

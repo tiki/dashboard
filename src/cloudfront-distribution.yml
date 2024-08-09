@@ -3,12 +3,12 @@ CloudFrontDistribution:
   Properties:
     DistributionConfig:
       Enabled: true
-      Comment: !Sub "CloudFront Distribution to ${HostName}"
+      Comment: !Sub 'CloudFront distribution for dashboard'
       DefaultRootObject: index.html
       Aliases:
-        - !Ref HostName
+        - !Ref DomainName
       DefaultCacheBehavior:
-        TargetOriginId: StaticSiteBucketOrigin
+        TargetOriginId: BucketOrigin
         ViewerProtocolPolicy: redirect-to-https
         Compress: true
         AllowedMethods:
@@ -22,20 +22,14 @@ CloudFrontDistribution:
           Cookies:
             Forward: none
       Origins:
-        - DomainName: !GetAtt StaticSiteBucket.DomainName
-          Id: StaticSiteBucketOrigin
+        - DomainName: !GetAtt Bucket.DomainName
+          Id: BucketOrigin
           S3OriginConfig:
-            OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CloudFrontOAI}"
+            OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CloudFrontOAI}'
       ViewerCertificate:
-        AcmCertificateArn: !Ref NetworkSSLCertificate
+        AcmCertificateArn: !Ref SslCertificate
         SslSupportMethod: sni-only
         MinimumProtocolVersion: TLSv1.2_2019
-NetworkDNSRecord:
-  Type: AWS::Route53::RecordSet
-  Properties:
-    HostedZoneId: !Ref DNSZone
-    Name: !Ref HostName
-    Type: CNAME
-    TTL: 300
-    ResourceRecords:
-      - !GetAtt CloudFrontDistribution.DomainName
+
+
+

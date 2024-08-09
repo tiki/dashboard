@@ -1,4 +1,4 @@
-<script lang="ts" script></script>
+<script lang="ts" setup></script>
 
 <template>
   <div class="ml-[15rem]">
