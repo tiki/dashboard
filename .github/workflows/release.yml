@@ -28,7 +28,7 @@ jobs:
       - name: Assume Artifacts Role
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ARTIFACTS_ID }}:role/CopyStaticSite
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ARTIFACTS_ID }}:role/GitHubS3StaticRelease
           aws-region: ${{ env.AWS_REGION }}
           mask-aws-account-id: true
           role-chaining: true

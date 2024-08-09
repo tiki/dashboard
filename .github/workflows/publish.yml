@@ -1,17 +1,22 @@
 name: "Publish"
 
+# on:
+#   push:
+#     branches: [ "main" ]
+
 on:
-  push:
-    branches: [ "main" ]
+  pull_request:
+    branches:
+      - main
 
 env:
   AWS_REGION: "us-east-2"
-  PRODUCT_ID: ""
+  PRODUCT_ID: "prod-sg5k3djbircc2"
 
 jobs:
   Publish:
     runs-on: ubuntu-latest
-    environment: Production
+    # environment: Production
     permissions:
       id-token: write
       contents: read
@@ -43,7 +48,7 @@ jobs:
       - name: Publish Application
         run: make publish VERSION=${{ steps.semver.outputs.nextStrict }} PRODUCT_ID=${{ env.PRODUCT_ID }}
 
-  Release:
+  Tag:
     needs: Publish
     runs-on: ubuntu-latest
     environment: Production

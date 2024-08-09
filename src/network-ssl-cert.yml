@@ -1,9 +1,9 @@
   NetworkSSLCertificate: 
     Type: AWS::CertificateManager::Certificate
     Properties:
-      DomainName: !Ref HostName
+      DomainName: dashboard.tiki.company
       DomainValidationOptions:
-        - DomainName: !Ref HostName
-          HostedZoneId: !Ref DNSZone
+        - DomainName: dashboard.tiki.company
+          HostedZoneId: !Ref HostedZone
       ValidationMethod: DNS
   

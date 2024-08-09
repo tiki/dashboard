@@ -2,5 +2,5 @@
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
     Properties:
       CloudFrontOriginAccessIdentityConfig:
-        Comment: !Sub 'OAI para ${HostName}'
+        Comment: !Sub 'OAI para Dashboard'
   

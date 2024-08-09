@@ -1,0 +1,9 @@
+Domain:
+  Type: AWS::Route53::RecordSet
+  Properties:
+    HostedZoneId: !Ref HostedZone
+    Name: dashboard.tiki.company
+    Type: CNAME
+    TTL: 300
+    ResourceRecords:
+      - !GetAtt CloudFrontDistribution.DomainName
