@@ -12,12 +12,14 @@ const auth = useAuthenticator()
 </script>
 
 <template>
-  <div
-    class="flex gap-4 flex-col items-center justify-center h-screen bg-yellow-light"
-    v-if="auth.route !== 'authenticated'"
-  >
-    <img src="./assets/images/tiki-logo.svg" alt="" class="w-32" />
-    <authenticator></authenticator>
+  <div class="flex items-center justify-center h-screen" v-if="auth.route !== 'authenticated'">
+    <div class="px-10 flex flex-col items-center justify-center gap-4">
+      <img src="./assets/images/tiki-logo.svg" alt="" class="w-32 md:hidden" />
+      <authenticator></authenticator>
+    </div>
+    <div class="bg-yellow-light h-full md:flex items-center w-3/4 justify-center hidden">
+      <img src="./assets/images/tiki-logo.svg" alt="" class="w-32" />
+    </div>
   </div>
 
   <template v-if="auth.route === 'authenticated'">
