@@ -1,3 +1,5 @@
+#file: noinspection YamlFormatViolation
+
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
 Description: Dashboard static hosting
@@ -6,5 +8,11 @@ Parameters:
   HostedZone:
     Type: String
     Description: Hosted zone ID for the domain
+  SslCertificate:
+    Type: String
+    Description: ARN of the SSL certificate to use. Must be in us-east-1
+  DomainName:
+    Type: String
+    Description: Domain name for the dashboard
 
 Resources:

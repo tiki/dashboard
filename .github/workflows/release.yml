@@ -15,15 +15,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repositório
-        uses: actions/checkout@v2
-
-      - name: Configurar AWS CLI
-        uses: aws-actions/configure-aws-credentials@v1
+      - uses: actions/checkout@v4
+      - name: Assume OIDC Role
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_IDENTITY_ID }}:role/GitHubOidc
+          aws-region: ${{ env.AWS_REGION }}
+          mask-aws-account-id: true
 
       - name: Assume Artifacts Role
         uses: aws-actions/configure-aws-credentials@v4

@@ -6,7 +6,7 @@
         Comment: !Sub 'Distribuição CloudFront para dashboard.tiki.company'
         DefaultRootObject: index.html
         Aliases:
-          - dashboard.tiki.company
+          - !Ref DomainName
         DefaultCacheBehavior:
           TargetOriginId: StaticSiteBucketOrigin
           ViewerProtocolPolicy: redirect-to-https
@@ -27,9 +27,9 @@
             S3OriginConfig:
               OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CloudFrontOAI}'
         ViewerCertificate:
-          AcmCertificateArn: !Ref NetworkSSLCertificate
+          AcmCertificateArn: !Ref SslCertificate
           SslSupportMethod: sni-only
           MinimumProtocolVersion: TLSv1.2_2019
 
-  
+
 
