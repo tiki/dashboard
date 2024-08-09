@@ -14,11 +14,11 @@ const auth = useAuthenticator()
 <template>
   <div class="flex items-center justify-center h-screen" v-if="auth.route !== 'authenticated'">
     <div class="px-10 flex flex-col items-center justify-center gap-4">
-      <img src="./assets/images/tiki-logo.svg" alt="" class="w-32 md:hidden" />
+      <img src="./assets/images/tiki-logo.svg" alt="" class="w-24 md:hidden" />
       <authenticator></authenticator>
     </div>
     <div class="bg-yellow-light h-full md:flex items-center w-3/4 justify-center hidden">
-      <img src="./assets/images/tiki-logo.svg" alt="" class="w-32" />
+      <img src="./assets/images/tiki-logo.svg" alt="" />
     </div>
   </div>
 
