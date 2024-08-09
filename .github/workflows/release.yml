@@ -36,6 +36,8 @@ jobs:
         uses: ietf-tools/semver-action@v1
         with:
           token: ${{ github.token }}
+          noVersionBumpBehavior: "silent"
+          noNewCommitBehavior: "silent"
 
       - name: Copy Static Site
-        run: aws s3 sync s3://tiki-artifacts-catalog/dashboard/${{ steps.semver.outputs.nextStrict }} s3://${{ env.RELEASE_BUCKET }} --recursive
+        run: aws s3 sync s3://tiki-artifacts-catalog/dashboard/${{ steps.semver.outputs.current }} s3://${{ env.RELEASE_BUCKET }} --recursive
