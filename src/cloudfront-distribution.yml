@@ -8,7 +8,7 @@ CloudFrontDistribution:
       Aliases:
         - !Ref DomainName
       DefaultCacheBehavior:
-        TargetOriginId: StaticSiteBucketOrigin
+        TargetOriginId: BucketOrigin
         ViewerProtocolPolicy: redirect-to-https
         Compress: true
         AllowedMethods:
@@ -22,8 +22,8 @@ CloudFrontDistribution:
           Cookies:
             Forward: none
       Origins:
-        - DomainName: !GetAtt StaticSiteBucket.DomainName
-          Id: StaticSiteBucketOrigin
+        - DomainName: !GetAtt Bucket.DomainName
+          Id: BucketOrigin
           S3OriginConfig:
             OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CloudFrontOAI}'
       ViewerCertificate:

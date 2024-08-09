@@ -1,7 +1,7 @@
-StaticSiteBucketPolicy:
+BucketPolicy:
   Type: AWS::S3::BucketPolicy
   Properties:
-    Bucket: !Ref StaticSiteBucket
+    Bucket: !Ref Bucket
     PolicyDocument:
       Version: '2012-10-17'
       Statement:
@@ -9,4 +9,4 @@ StaticSiteBucketPolicy:
           Principal:
             AWS: !Sub 'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${CloudFrontOAI}'
           Action: 's3:GetObject'
-          Resource: !Sub 'arn:aws:s3:::${S3Bucket}/*'
+          Resource: !Sub 'arn:aws:s3:::${Bucket}/*'
