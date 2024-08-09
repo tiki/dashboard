@@ -10,3 +10,15 @@ BucketPolicy:
             AWS: !Sub 'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${CloudFrontOAI}'
           Action: 's3:GetObject'
           Resource: !Sub 'arn:aws:s3:::${Bucket}/*'
+        - Effect: Allow
+          Principal:
+              AWS: arn:aws:iam::992382831795:role/GitHubS3StaticRelease
+          Action:
+            - s3:ListBucket
+            - s3:GetObject
+            - s3:GetBucketLocation
+            - s3:PutObject
+            - s3:DeleteObject
+          Resource:
+            - !Sub 'arn:aws:s3:::${Bucket}'
+            - !Sub 'arn:aws:s3:::${Bucket}/*'
