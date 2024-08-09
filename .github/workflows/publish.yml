@@ -6,7 +6,7 @@ on:
 
 env:
   AWS_REGION: "us-east-2"
-  PRODUCT_ID: "prod-sg5k3djbircc2"
+  PRODUCT_ID: "prod-w6xxrrmsxd3oq"
 
 jobs:
   Publish:
