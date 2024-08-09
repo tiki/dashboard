@@ -9,11 +9,15 @@ on:
 
 env:
   AWS_REGION: "us-east-2"
+  RELEASE_BUCKET: "tiki-024848454348-us-east-2-dashboard"
 
 jobs:
   copy_files:
     runs-on: ubuntu-latest
-
+    environment: Production
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - name: Assume OIDC Role
@@ -31,6 +35,12 @@ jobs:
           mask-aws-account-id: true
           role-chaining: true
 
+      - name: Get Version
+        id: semver
+        uses: ietf-tools/semver-action@v1
+        with:
+          token: ${{ github.token }}
+          branch: ${{ steps.getpr.outputs.branch }}
+
       - name: Copy Static Site
-        run: |
-          aws s3 sync s3://tiki-artifacts-catalog/dashboard/${{ github.event.inputs.VERSION }} s3://tiki-dashboard-site --recursive
+        run: aws s3 sync s3://tiki-artifacts-catalog/dashboard/${{ steps.semver.outputs.nextStrict }} s3://${{ env.RELEASE_BUCKET }} --recursive
