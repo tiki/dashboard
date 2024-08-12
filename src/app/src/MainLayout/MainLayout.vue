@@ -58,11 +58,6 @@ const navigationList = [
         name: 'my requests',
         icon: 'pi pi-list mr-2',
         route: 'messages/requests'
-      },
-      {
-        name: 'new request',
-        icon: 'pi pi-plus mr-2',
-        route: 'messages/new-request'
       }
     ]
   }
