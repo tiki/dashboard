@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '../LoginPage/LoginPage.vue'
-import HomePage from '../HomePage/HomePage.vue'
 import RequestsPage from '../RequestsPage/RequestsPage.vue'
 import ThreadPage from '../ThreadPage/ThreadPage.vue'
 import DatasetsPage from '../DatasetsPage/DatasetsPage.vue'
@@ -13,7 +12,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomePage
+      redirect: { name: 'organizations' }
     },
     {
       path: '/messages',
