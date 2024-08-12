@@ -62,7 +62,7 @@ const getMockData = () => {
     :rows="5"
     dataKey="title"
     :loading="loading"
-    :globalFilterFields="['title', 'lastRepliedBy', 'status']"
+    :globalFilterFields="['domain', 'organization']"
   >
     <template #header>
       <div class="flex py-4 w-full">
