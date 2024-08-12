@@ -5,8 +5,8 @@ import IconField from 'primevue/iconfield'
 import InputIcon from 'primevue/inputicon'
 import DataTable from 'primevue/datatable'
 import InputText from 'primevue/inputtext'
-import Tag from 'primevue/tag'
 import Column from 'primevue/column'
+import Button from 'primevue/button'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -25,20 +25,10 @@ onMounted(() => {
 
 const getMockData = () => {
   return [
-    { id: 1, title: 'Issue with login', lastRepliedBy: 'Amy Elsner', status: 'open' },
-    { id: 2, title: 'Payment not processed', lastRepliedBy: 'Anna Fali', status: 'closed' },
-    { id: 3, title: 'Bug in the system', lastRepliedBy: 'Asiya Javayant', status: 'pending' },
-    { id: 4, title: 'Feature request', lastRepliedBy: 'Bernardo Dominic', status: 'open' },
-    { id: 5, title: 'UI not responsive', lastRepliedBy: 'Elwin Sharvill', status: 'closed' },
-    { id: 6, title: 'Error 404 on dashboard', lastRepliedBy: 'Ioni Bowcher', status: 'pending' },
-    { id: 7, title: 'Slow performance', lastRepliedBy: 'Ivan Magalhaes', status: 'open' },
-    { id: 8, title: 'Missing documentation', lastRepliedBy: 'Onyama Limba', status: 'closed' },
-    { id: 9, title: 'Crash on save', lastRepliedBy: 'Stephen Shaw', status: 'pending' },
-    { id: 10, title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
-    { id: 11, title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
-    { id: 12, title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
-    { id: 13, title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' },
-    { id: 14, title: 'Inconsistent data', lastRepliedBy: 'XuXue Feng', status: 'open' }
+    { id: 1, name: 'Tiki', created_at: 'December 17, 1995 03:24:00' },
+    { id: 2, name: 'Organization 2', created_at: 'December 17, 1995 03:24:00' },
+    { id: 3, name: 'Organization 3', created_at: 'December 17, 1995 03:24:00' },
+    { id: 4, name: 'Organization 4', created_at: 'December 17, 1995 03:24:00' }
   ]
 }
 
@@ -83,28 +73,24 @@ const openThread = (event: any) => {
     <template #empty> No items found. </template>
     <template #loading> Loading data. Please wait. </template>
 
-    <Column field="title" header="TITLE" style="min-width: 10em">
+    <Column field="name" header="NAME" style="min-width: 10em">
       <template #body="{ data }">
-        {{ data.title }}
+        {{ data.name }}
       </template>
     </Column>
 
-    <Column field="lastRepliedBy" header="LAST REPLIED BY" style="min-width: 10em">
+    <Column field="created_at" header="CREATED AT" style="min-width: 10em">
       <template #body="{ data }">
-        {{ data.lastRepliedBy }}
+        {{ data.created_at }}
       </template>
     </Column>
 
-    <Column field="status" header="STATUS" :showFilterMenu="false" style="min-width: 10em">
+    <Column field="domains" header="DOMAINS" :showFilterMenu="false" style="min-width: 10em">
       <template #body="{ data }">
-        <Tag :value="data.status" :severity="getSeverity(data.status)" />
+        <Button icon="pi pi-eye" aria-label="eye" rounded text severity="secondary" />
       </template>
     </Column>
   </DataTable>
 </template>
 
-<style>
-.p-datatable-tbody td {
-  cursor: pointer;
-}
-</style>
+<style></style>

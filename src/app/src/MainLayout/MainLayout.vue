@@ -16,26 +16,31 @@ defineProps({
 defineEmits(['logout'])
 
 const navigationList = [
-  // {
-  //   header: 'account',
-  //   children: [
-  //     {
-  //       name: 'organization',
-  //       icon: 'pi pi-user mr-2',
-  //       route: 'account/organization'
-  //     },
-  //     {
-  //       name: 'team',
-  //       icon: 'pi pi-users mr-2',
-  //       route: 'account/team'
-  //     },
-  //     {
-  //       name: 'billing',
-  //       icon: 'pi pi-receipt mr-2',
-  //       route: 'account/billing'
-  //     }
-  //   ]
-  // },
+  {
+    header: 'account',
+    children: [
+      {
+        name: 'organizations',
+        icon: 'pi pi-users mr-2',
+        route: 'account/organizations'
+      },
+      {
+        name: 'domains',
+        icon: 'pi pi-globe mr-2',
+        route: 'account/domains'
+      }
+      // {
+      //   name: 'team',
+      //   icon: 'pi pi-users mr-2',
+      //   route: 'account/team'
+      // },
+      // {
+      //   name: 'billing',
+      //   icon: 'pi pi-receipt mr-2',
+      //   route: 'account/billing'
+      // }
+    ]
+  },
   {
     header: 'data publishing',
     children: [
