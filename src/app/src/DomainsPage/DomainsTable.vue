@@ -7,9 +7,6 @@ import DataTable from 'primevue/datatable'
 import InputText from 'primevue/inputtext'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
 
 const data = ref()
 const filters = ref({
@@ -25,10 +22,34 @@ onMounted(() => {
 
 const getMockData = () => {
   return [
-    { id: 1, name: 'Tiki', created_at: 'December 17, 1995 03:24:00' },
-    { id: 2, name: 'Organization 2', created_at: 'December 17, 1995 03:24:00' },
-    { id: 3, name: 'Organization 3', created_at: 'December 17, 1995 03:24:00' },
-    { id: 4, name: 'Organization 4', created_at: 'December 17, 1995 03:24:00' }
+    {
+      id: 1,
+      domain: 'Tiki',
+      organization: 'Organization 1',
+      created_at: 'December 17, 1995 03:24:00',
+      secret: '*******y712az'
+    },
+    {
+      id: 2,
+      domain: 'Organization 2',
+      organization: 'Organization 1',
+      created_at: 'December 17, 1995 03:24:00',
+      secret: '*******y712az'
+    },
+    {
+      id: 3,
+      domain: 'Organization 3',
+      organization: 'Organization 2',
+      created_at: 'December 17, 1995 03:24:00',
+      secret: '*******y712az'
+    },
+    {
+      id: 4,
+      domain: 'Organization 4',
+      organization: 'Organization 2',
+      created_at: 'December 17, 1995 03:24:00',
+      secret: '*******y712az'
+    }
   ]
 }
 </script>
@@ -56,9 +77,15 @@ const getMockData = () => {
     <template #empty> No items found. </template>
     <template #loading> Loading data. Please wait. </template>
 
-    <Column field="name" header="NAME" style="min-width: 10em">
+    <Column field="domain" header="DOMAIN" style="min-width: 10em">
       <template #body="{ data }">
-        {{ data.name }}
+        {{ data.domain }}
+      </template>
+    </Column>
+
+    <Column field="organization" header="ORGANIZATION" style="min-width: 10em">
+      <template #body="{ data }">
+        {{ data.organization }}
       </template>
     </Column>
 
@@ -68,16 +95,19 @@ const getMockData = () => {
       </template>
     </Column>
 
-    <Column field="domains" header="DOMAINS" :showFilterMenu="false" style="min-width: 10em">
+    <Column field="secret" header="SECRET" :showFilterMenu="false" style="min-width: 10em">
       <template #body="{ data }">
-        <Button
-          icon="pi pi-eye"
-          aria-label="eye"
-          rounded
-          text
-          severity="secondary"
-          v-tooltip.top="'View Domains'"
-        />
+        <div>
+          <span> {{ data.secret }}</span>
+          <Button
+            icon="pi pi-refresh"
+            aria-label="eye"
+            rounded
+            text
+            severity="secondary"
+            v-tooltip.top="'Refresh secret'"
+          />
+        </div>
       </template>
     </Column>
   </DataTable>

@@ -5,7 +5,7 @@ import Aura from '@primevue/themes/aura'
 import router from './router'
 import 'primeicons/primeicons.css'
 import AmplifyVue from '@aws-amplify/ui-vue'
-
+import Tooltip from 'primevue/tooltip'
 import '@/assets/main.css'
 import '@aws-amplify/ui-vue/styles.css'
 
@@ -39,6 +39,8 @@ Amplify.configure({
 })
 
 const app = createApp(App)
+
+app.directive('tooltip', Tooltip)
 
 app.use(router)
 
