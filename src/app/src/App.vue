@@ -17,7 +17,7 @@ const auth = useAuthenticator()
     v-if="auth.route !== 'authenticated'"
   >
     <img src="./assets/images/tiki-logo.svg" alt="" class="w-24" />
-    <authenticator></authenticator>
+    <authenticator :sign-up-attributes="['name']"></authenticator>
   </div>
 
   <template v-if="auth.route === 'authenticated'">
