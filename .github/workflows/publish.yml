@@ -41,7 +41,13 @@ jobs:
           branch: main
 
       - name: Publish Application
-        run: make publish VERSION=${{ steps.semver.outputs.nextStrict }} PRODUCT_ID=${{ env.PRODUCT_ID }}
+        run: | 
+          make publish \
+          VERSION=${{ steps.semver.outputs.nextStrict }} \
+          PRODUCT_ID=${{ env.PRODUCT_ID }} \
+          API_URL="https:\/\/api.tiki.company" \
+          USER_POOL_ID=${{ secrets.USER_POOL_ID }} \
+          USER_POOL_CLIENT_ID=${{ secrets.USER_POOL_CLIENT_ID }}
 
   Tag:
     needs: Publish
