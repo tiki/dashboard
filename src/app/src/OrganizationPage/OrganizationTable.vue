@@ -7,9 +7,6 @@ import DataTable from 'primevue/datatable'
 import InputText from 'primevue/inputtext'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
 
 const data = ref()
 const filters = ref({
