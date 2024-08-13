@@ -2,7 +2,7 @@
 import Button from 'primevue/button'
 import RequestsTable from './RequestsTable.vue'
 import { ref } from 'vue'
-import NewRequestDialog from './NewRequestDialog.vue'
+import NewRequestDialog from './RequestsDialog.vue'
 
 const isVisible = ref<boolean>(false)
 </script>

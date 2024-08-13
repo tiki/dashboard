@@ -4,7 +4,6 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { type User } from './types/user'
 import type { PropType } from 'vue'
-import Button from 'primevue/button'
 
 const currentRoute = useRoute()
 const shouldShowSidebar = computed(() => currentRoute.meta.sidebar !== false)

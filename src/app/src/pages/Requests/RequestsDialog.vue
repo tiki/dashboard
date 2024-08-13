@@ -13,13 +13,14 @@ defineProps({
     required: true
   }
 })
-const selectedCity = ref()
-const cities = ref([
-  { name: 'New York', code: 'NY' },
-  { name: 'Rome', code: 'RM' },
-  { name: 'London', code: 'LDN' },
-  { name: 'Istanbul', code: 'IST' },
-  { name: 'Paris', code: 'PRS' }
+const selectedSubject = ref()
+const subjects = ref([
+  { name: 'Error' },
+  { name: 'Request' },
+  { name: 'Comercial' },
+  { name: 'Other' },
+  { name: 'Feedback'},
+  { name: 'Suggestion'}, 
 ])
 </script>
 
@@ -29,8 +30,8 @@ const cities = ref([
       <form class="flex flex-col justify-center items-center gap-6">
         <InputText placeholder="Title" class="w-full" />
         <Select
-          v-model="selectedCity"
-          :options="cities"
+          v-model="selectedSubject"
+          :options="subjects"
           optionLabel="name"
           placeholder="Select a subject"
           class="w-full"
