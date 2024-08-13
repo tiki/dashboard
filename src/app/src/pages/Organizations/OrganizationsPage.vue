@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Button from 'primevue/button'
-import OrganizationTable from './OrganizationTable.vue'
-import NewOrganizationDialog from './NewOrganizationDialog.vue'
+import OrganizationTable from './OrganizationsTable.vue'
+import NewOrganizationDialog from './OrganizationsDialog.vue'
 import { ref } from 'vue'
 
 const isVisible = ref<boolean>(false)
