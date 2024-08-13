@@ -11,6 +11,9 @@ import '@aws-amplify/ui-vue/styles.css'
 
 import { Amplify } from 'aws-amplify'
 
+console.log(import.meta.env.VITE_USER_POOL_ID)
+console.log(import.meta.env.VITE_USER_POOL_CLIENT_ID)
+
 Amplify.configure({
   Auth: {
     Cognito: {
