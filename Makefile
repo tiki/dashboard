@@ -26,6 +26,10 @@ compile: template.yml
 		echo "Processing: $$res"; \
 		yq eval '.Resources += load("'$$res'")' out/template.yml -i || exit 1; \
 	done
+	cp src/app/.env.template src/app/.env
+	sed -i 's/%%%API_URL%%%/$(API_URL)/' src/app/.env
+	sed -i 's/%%%USER_POOL_ID%%%/$(USER_POOL_ID)/' src/app/.env
+	sed -i 's/%%%USER_POOL_CLIENT_ID%%%/$(USER_POOL_CLIENT_ID)/' src/app/.env
 
 build: compile
 	sam build --template $(TEMPLATE_FILE)
