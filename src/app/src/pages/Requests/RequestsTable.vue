@@ -6,7 +6,6 @@ import InputIcon from 'primevue/inputicon'
 import DataTable from 'primevue/datatable'
 import InputText from 'primevue/inputtext'
 import Tag from 'primevue/tag'
-import Select from 'primevue/select'
 import Column from 'primevue/column'
 import { useRouter } from 'vue-router'
 

@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import MainLayout from './MainLayout/MainLayout.vue'
+import MainLayout from './layouts/Main/MainLayout.vue'
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-vue'
-
-import { cognitoUserPoolsTokenProvider } from 'aws-amplify/auth/cognito'
-import { defaultStorage } from 'aws-amplify/utils'
-
-cognitoUserPoolsTokenProvider.setKeyValueStorage(defaultStorage)
 
 const auth = useAuthenticator()
 </script>
@@ -17,7 +12,7 @@ const auth = useAuthenticator()
     v-if="auth.route !== 'authenticated'"
   >
     <img src="./assets/images/tiki-logo.svg" alt="" class="w-24" />
-    <authenticator></authenticator>
+    <authenticator :sign-up-attributes="['name']"></authenticator>
   </div>
 
   <template v-if="auth.route === 'authenticated'">
@@ -25,19 +20,3 @@ const auth = useAuthenticator()
     <RouterView />
   </template>
 </template>
-
-<style>
-[data-amplify-authenticator] {
-  --amplify-components-button-primary-background-color: #00b272;
-  --amplify-components-fieldcontrol-focus-box-shadow: #00b272;
-  --amplify-components-tabs-item-active-border-color: #00b272;
-  --amplify-components-tabs-item-color: var(--amplify-components-field-label-color);
-  --amplify-components-tabs-item-hover-color: #00b272;
-  --amplify-components-tabs-item-active-color: #00b272;
-  --amplify-components-button-link-color: var(--amplify-components-field-label-color);
-  --amplify-components-button-link-hover-color: #ffffff;
-  --amplify-components-button-link-hover-background-color: #00b272;
-  --amplify-components-button-primary-hover-background-color: #007048;
-  --amplify-components-passwordfield-button-hover-background-color: #00b27210;
-}
-</style>
