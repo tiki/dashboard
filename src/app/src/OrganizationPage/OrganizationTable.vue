@@ -22,10 +22,34 @@ onMounted(() => {
 
 const getMockData = () => {
   return [
-    { id: 1, name: 'Tiki', created_at: 'December 17, 1995 03:24:00' },
-    { id: 2, name: 'Organization 2', created_at: 'December 17, 1995 03:24:00' },
-    { id: 3, name: 'Organization 3', created_at: 'December 17, 1995 03:24:00' },
-    { id: 4, name: 'Organization 4', created_at: 'December 17, 1995 03:24:00' }
+    {
+      id: 1,
+      domain: 'Tiki',
+      name: 'Organization 1',
+      lagoon: 'x6adnew8',
+      secret: '*******y712az'
+    },
+    {
+      id: 2,
+      domain: 'Organization 2',
+      name: 'Organization 2',
+      lagoon: 'x6adnew8',
+      secret: '*******y712az'
+    },
+    {
+      id: 3,
+      domain: 'Organization 3',
+      name: 'Organization 3',
+      lagoon: 'x6adnew8',
+      secret: '*******y712az'
+    },
+    {
+      id: 4,
+      domain: 'Organization 4',
+      name: 'Organization 4',
+      lagoon: 'x6adnew8',
+      secret: '*******y712az'
+    }
   ]
 }
 </script>
@@ -38,7 +62,7 @@ const getMockData = () => {
     :rows="5"
     dataKey="title"
     :loading="loading"
-    :globalFilterFields="['name']"
+    :globalFilterFields="['domain', 'organization']"
   >
     <template #header>
       <div class="flex py-4 w-full">
@@ -59,22 +83,31 @@ const getMockData = () => {
       </template>
     </Column>
 
-    <Column field="created_at" header="CREATED AT" style="min-width: 10em">
+    <Column field="domain" header="DOMAIN" style="min-width: 10em">
       <template #body="{ data }">
-        {{ data.created_at }}
+        {{ data.domain }}
       </template>
     </Column>
 
-    <Column field="domains" header="DOMAINS" :showFilterMenu="false" style="min-width: 10em">
+    <Column field="lagoon" header="LAGOON" style="min-width: 10em">
       <template #body="{ data }">
-        <Button
-          icon="pi pi-eye"
-          aria-label="eye"
-          rounded
-          text
-          severity="secondary"
-          v-tooltip.top="'View Domains'"
-        />
+        {{ data.lagoon }}
+      </template>
+    </Column>
+
+    <Column field="secret" header="SECRET" :showFilterMenu="false" style="min-width: 10em">
+      <template #body="{ data }">
+        <div>
+          <span> {{ data.secret }}</span>
+          <Button
+            icon="pi pi-refresh"
+            aria-label="eye"
+            rounded
+            text
+            severity="secondary"
+            v-tooltip.top="'Refresh secret'"
+          />
+        </div>
       </template>
     </Column>
   </DataTable>

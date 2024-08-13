@@ -16,6 +16,7 @@ defineProps({
     <div>
       <form class="flex flex-col justify-center items-center gap-6">
         <InputText class="w-full" placeholder="Name" />
+        <InputText class="w-full" placeholder="Domain" />
         <Button
           label="Submit"
           severity="success"
