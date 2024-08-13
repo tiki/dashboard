@@ -71,6 +71,11 @@ const getDatasets = async () => {
           {{ data.filename }}
         </template>
       </Column>
+      <Column field="lagoon" header="LAGOON" :showFilterMenu="false" style="min-width: 10em">
+        <template #body="{ data }">
+          {{ data.lagoon }}
+        </template>
+      </Column>
       <Column
         field="uploaded_datetime"
         header="UPLOADED DATETIME"

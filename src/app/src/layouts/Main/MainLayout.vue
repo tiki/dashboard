@@ -4,7 +4,6 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { type User } from './types/user'
 import type { PropType } from 'vue'
-import Button from 'primevue/button'
 
 const currentRoute = useRoute()
 const shouldShowSidebar = computed(() => currentRoute.meta.sidebar !== false)
@@ -16,26 +15,16 @@ defineProps({
 defineEmits(['logout'])
 
 const navigationList = [
-  // {
-  //   header: 'account',
-  //   children: [
-  //     {
-  //       name: 'organization',
-  //       icon: 'pi pi-user mr-2',
-  //       route: 'account/organization'
-  //     },
-  //     {
-  //       name: 'team',
-  //       icon: 'pi pi-users mr-2',
-  //       route: 'account/team'
-  //     },
-  //     {
-  //       name: 'billing',
-  //       icon: 'pi pi-receipt mr-2',
-  //       route: 'account/billing'
-  //     }
-  //   ]
-  // },
+  {
+    header: 'account',
+    children: [
+      {
+        name: 'organizations',
+        icon: 'pi pi-users mr-2',
+        route: 'account/organizations'
+      }
+    ]
+  },
   {
     header: 'data publishing',
     children: [
@@ -53,11 +42,6 @@ const navigationList = [
         name: 'my requests',
         icon: 'pi pi-list mr-2',
         route: 'messages/requests'
-      },
-      {
-        name: 'new request',
-        icon: 'pi pi-plus mr-2',
-        route: 'messages/new-request'
       }
     ]
   }
@@ -80,7 +64,7 @@ const navigationList = [
       <div class="flex flex-col h-full gap-10">
         <div class="flex items-center pt-10">
           <span class="flex items-center gap-2 w-full justify-center">
-            <img src="../assets/images/tiki-logo-2.svg" alt="" class="w-1/12" />
+            <img src="../../assets/images/tiki-logo-2.svg" alt="" class="w-1/12" />
             <span class="font-semibold text-2xl text-primary">TIKI</span>
           </span>
         </div>
