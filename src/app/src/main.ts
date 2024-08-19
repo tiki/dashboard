@@ -8,10 +8,7 @@ import AmplifyVue from '@aws-amplify/ui-vue'
 import Tooltip from 'primevue/tooltip'
 import '@/assets/main.css'
 import '@aws-amplify/ui-vue/styles.css'
-import { amplify } from './amplify'
-
-console.log(import.meta.env.VITE_USER_POOL_ID)
-console.log(import.meta.env.VITE_USER_POOL_CLIENT_ID)
+import { amplify } from './services'
 
 const app = createApp(App)
 
