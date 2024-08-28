@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+
 import { FilterMatchMode } from '@primevue/core/api'
 import IconField from 'primevue/iconfield'
 import InputIcon from 'primevue/inputicon'
@@ -8,6 +9,8 @@ import InputText from 'primevue/inputtext'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
 
+import { OrganizationService, type Organization } from './services'
+
 const data = ref()
 const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS }
@@ -15,8 +18,10 @@ const filters = ref({
 
 const loading = ref(true)
 
-onMounted(() => {
-  data.value = getMockData()
+onMounted(async () => {
+  const response = await OrganizationService.get()
+  console.log(response)
+  data.value = response
   loading.value = false
 })
 
@@ -114,3 +119,4 @@ const getMockData = () => {
 </template>
 
 <style></style>
+./services/organizationService

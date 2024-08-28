@@ -3,6 +3,13 @@ import Button from 'primevue/button'
 import OrganizationTable from './OrganizationsTable.vue'
 import NewOrganizationDialog from './OrganizationsDialog.vue'
 import { ref } from 'vue'
+import { auth } from '@/services'
+import { onMounted } from 'vue'
+
+onMounted(async () => {
+  const token = await auth.token()
+  console.log(token)
+})
 
 const isVisible = ref<boolean>(false)
 </script>
