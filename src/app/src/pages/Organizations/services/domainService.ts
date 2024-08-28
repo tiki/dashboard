@@ -11,11 +11,11 @@ export interface Domain {
 export class DomainService {
   static requestService = new RequestService()
 
-  async get(): Promise<Domain[]> {
+  static async get(): Promise<Domain[]> {
     return await DomainService.requestService.get<Domain[]>('/account/domain')
   }
 
-  async create(hostname: string, orgId: string): Promise<Domain> {
+  static async create(hostname: string, orgId: string): Promise<Domain> {
     return await DomainService.requestService.post<Domain>('/account/domain', { hostname, orgId })
   }
 }

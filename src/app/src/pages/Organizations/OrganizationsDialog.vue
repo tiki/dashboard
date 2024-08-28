@@ -6,7 +6,9 @@ import Message from 'primevue/message'
 
 import { ref } from 'vue'
 
-import { OrganizationService, type Organization } from './services'
+import { OrganizationService, type Organization, DomainService, type Domain } from './services'
+
+const emit = defineEmits(['created'])
 
 defineProps({
   isVisible: {
@@ -15,8 +17,8 @@ defineProps({
   }
 })
 
-const orgName = ref<string>('')
-const hostName = ref<string>('')
+const orgName = ref<string>()
+const hostName = ref<string>()
 const error = ref<string>()
 
 const createOrgDomain = async () => {
@@ -24,6 +26,15 @@ const createOrgDomain = async () => {
     return (error.value = 'Organization and Domain Names are required')
 
   const orgResponse: Organization = await OrganizationService.create(orgName.value)
+
+  if (!orgResponse || !orgResponse.orgId)
+    return (error.value = 'Error while creating a Organization, try again later.')
+
+  const domainResponse: Domain = await DomainService.create(hostName.value, orgResponse.orgId)
+
+  if (!domainResponse) return (error.value = 'Error while setting up a domain, try again later.')
+
+  emit('created')
 }
 </script>
 
@@ -31,8 +42,8 @@ const createOrgDomain = async () => {
   <Dialog v-bind:visible="isVisible" modal header="New Organization" :style="{ width: '30rem' }">
     <div>
       <form class="flex flex-col justify-center items-center gap-6">
-        <InputText class="w-full" placeholder="Organization Name" :v-model="orgName" />
-        <InputText class="w-full" placeholder="Host Name" :v-model="hostName" />
+        <InputText class="w-full" placeholder="Organization Name" v-model="orgName" />
+        <InputText class="w-full" placeholder="Host Name" v-model="hostName" />
         <Message severity="error" class="w-full flex justify-center items-center" v-if="error">{{
           error
         }}</Message>

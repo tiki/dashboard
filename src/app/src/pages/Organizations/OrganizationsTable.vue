@@ -9,7 +9,7 @@ import InputText from 'primevue/inputtext'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
 
-import { OrganizationService, type Organization } from './services'
+import { OrganizationService, type Organization, type Domain, DomainService } from './services'
 
 const data = ref()
 const filters = ref({
@@ -19,44 +19,12 @@ const filters = ref({
 const loading = ref(true)
 
 onMounted(async () => {
-  const response = await OrganizationService.get()
-  console.log(response)
-  data.value = response
+  const orgs: Organization[] = await OrganizationService.get()
+  const domains: Domain[] = await DomainService.get()
+  console.log(orgs, domains)
+  // data.value = response
   loading.value = false
 })
-
-const getMockData = () => {
-  return [
-    {
-      id: 1,
-      domain: 'Tiki',
-      name: 'Organization 1',
-      lagoon: 'x6adnew8',
-      secret: '*******y712az'
-    },
-    {
-      id: 2,
-      domain: 'Organization 2',
-      name: 'Organization 2',
-      lagoon: 'x6adnew8',
-      secret: '*******y712az'
-    },
-    {
-      id: 3,
-      domain: 'Organization 3',
-      name: 'Organization 3',
-      lagoon: 'x6adnew8',
-      secret: '*******y712az'
-    },
-    {
-      id: 4,
-      domain: 'Organization 4',
-      name: 'Organization 4',
-      lagoon: 'x6adnew8',
-      secret: '*******y712az'
-    }
-  ]
-}
 </script>
 
 <template>

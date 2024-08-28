@@ -2,9 +2,14 @@
 import Button from 'primevue/button'
 import OrganizationTable from './OrganizationsTable.vue'
 import NewOrganizationDialog from './OrganizationsDialog.vue'
+import Toast from 'primevue/toast'
+
 import { ref } from 'vue'
 import { auth } from '@/services'
 import { onMounted } from 'vue'
+import { useToast } from 'primevue/usetoast'
+
+const toast = useToast()
 
 onMounted(async () => {
   const token = await auth.token()
@@ -12,6 +17,17 @@ onMounted(async () => {
 })
 
 const isVisible = ref<boolean>(false)
+
+const newOrgCreated = () => {
+  isVisible.value = false
+  toast.add({
+    severity: 'success',
+    summary: 'Success',
+    detail: 'New Organization Created',
+    life: 3000,
+    group: 'bc'
+  })
+}
 </script>
 
 <template>
@@ -26,7 +42,12 @@ const isVisible = ref<boolean>(false)
     </div>
     <Organization-Table />
   </div>
-  <New-Organization-Dialog :is-visible="isVisible" @update:visible="isVisible = !isVisible" />
+  <New-Organization-Dialog
+    :is-visible="isVisible"
+    @update:visible="isVisible = !isVisible"
+    @created="newOrgCreated"
+  />
+  <Toast position="bottom-center" group="bc" />
 </template>
 
 <style></style>

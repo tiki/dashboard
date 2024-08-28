@@ -112,7 +112,7 @@ export default class RequestService {
       const response = await fetch(url, options)
       return await this.handleResponse<T>(response)
     } catch (error) {
-      console.error(`Error ${method}ing data:`, error)
+      console.error(`Error ${method.toLowerCase()}ing data:`, error)
       throw new Error(`Failed to ${method.toLowerCase()} data.`)
     }
   }
