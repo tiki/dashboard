@@ -10,8 +10,6 @@ import { ref } from 'vue'
 import { OrganizationService, type Organization, DomainService, type Domain } from './services'
 import { useLoading } from '@/services'
 
-const emit = defineEmits(['created'])
-
 defineProps({
   isVisible: {
     type: Boolean,
@@ -19,9 +17,13 @@ defineProps({
   }
 })
 
+const emit = defineEmits(['copied'])
+
 const orgName = ref<string>()
 const hostName = ref<string>()
 const error = ref<string>()
+
+const domain = ref<Domain>()
 
 const { isLoading: isSubmitting, withLoading } = useLoading()
 
@@ -38,17 +40,27 @@ const createOrgDomain = async () => {
 
   if (!domainResponse) return (error.value = 'Error while setting up a domain, try again later.')
 
-  emit('created')
+  domain.value = domainResponse
 }
 
 const onSubmit = () => {
   withLoading(createOrgDomain)
 }
+
+const copyToClipboard = (secret: string) => {
+  navigator.clipboard.writeText(secret)
+  emit('copied')
+}
 </script>
 
 <template>
-  <Dialog v-bind:visible="isVisible" modal header="New Organization" :style="{ width: '30rem' }">
-    <div>
+  <Dialog
+    v-bind:visible="isVisible"
+    modal
+    :header="!domain ? 'New Organization' : 'Organization Created'"
+    :style="{ width: '30rem' }"
+  >
+    <div v-if="!domain?.secret">
       <form class="flex flex-col justify-center items-center gap-6">
         <InputText class="w-full" placeholder="Organization Name" v-model="orgName" />
         <InputText class="w-full" placeholder="Host Name" v-model="hostName" />
@@ -66,6 +78,19 @@ const onSubmit = () => {
           <ProgressSpinner v-if="isSubmitting" style="width: 30px; height: 30px" strokeWidth="8" />
         </Button>
       </form>
+    </div>
+    <div v-else>
+      <Message severity="success" class="w-full flex justify-center items-center">
+        {{ domain.secret }}
+        <Button
+          icon="pi pi-clone"
+          severity="contrast"
+          text
+          rounded
+          aria-label="copy"
+          @click="copyToClipboard(domain.secret)"
+        />
+      </Message>
     </div>
   </Dialog>
 </template>

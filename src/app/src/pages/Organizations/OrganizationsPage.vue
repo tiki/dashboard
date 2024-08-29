@@ -18,12 +18,11 @@ onMounted(async () => {
 
 const isVisible = ref<boolean>(false)
 
-const newOrgCreated = () => {
-  isVisible.value = false
+const secretCopied = () => {
   toast.add({
     severity: 'success',
     summary: 'Success',
-    detail: 'New Organization Created',
+    detail: 'Copied to clipboard',
     life: 3000,
     group: 'bc'
   })
@@ -45,7 +44,7 @@ const newOrgCreated = () => {
   <New-Organization-Dialog
     :is-visible="isVisible"
     @update:visible="isVisible = !isVisible"
-    @created="newOrgCreated"
+    @copied="secretCopied"
   />
   <Toast position="bottom-center" group="bc" />
 </template>
