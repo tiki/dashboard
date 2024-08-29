@@ -3,10 +3,12 @@ import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
 import Message from 'primevue/message'
+import ProgressSpinner from 'primevue/progressspinner'
 
 import { ref } from 'vue'
 
 import { OrganizationService, type Organization, DomainService, type Domain } from './services'
+import { useLoading } from '@/services'
 
 const emit = defineEmits(['created'])
 
@@ -20,6 +22,8 @@ defineProps({
 const orgName = ref<string>()
 const hostName = ref<string>()
 const error = ref<string>()
+
+const { isLoading: isSubmitting, withLoading } = useLoading()
 
 const createOrgDomain = async () => {
   if (!orgName.value || !hostName.value)
@@ -35,6 +39,10 @@ const createOrgDomain = async () => {
   if (!domainResponse) return (error.value = 'Error while setting up a domain, try again later.')
 
   emit('created')
+}
+
+const onSubmit = () => {
+  withLoading(createOrgDomain)
 }
 </script>
 
@@ -52,9 +60,21 @@ const createOrgDomain = async () => {
           severity="success"
           class="w-full"
           style="background-color: #00b272"
-          @click="createOrgDomain"
-        />
+          :disabled="isSubmitting"
+          @click="onSubmit"
+        >
+          <ProgressSpinner v-if="isSubmitting" style="width: 30px; height: 30px" strokeWidth="8" />
+        </Button>
       </form>
     </div>
   </Dialog>
 </template>
+
+<style>
+.p-progressspinner-spin {
+  --p-progressspinner-color-1: white;
+  --p-progressspinner-color-2: white;
+  --p-progressspinner-color-3: white;
+  --p-progressspinner-color-4: white;
+}
+</style>
