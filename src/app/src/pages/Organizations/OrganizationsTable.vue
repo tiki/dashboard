@@ -8,6 +8,14 @@ import DataTable from 'primevue/datatable'
 import InputText from 'primevue/inputtext'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
+import Toast from 'primevue/toast'
+import { useConfirm } from 'primevue/useconfirm'
+import { useToast } from 'primevue/usetoast'
+import ConfirmPopup from 'primevue/confirmpopup'
+
+const toast = useToast()
+
+const confirm = useConfirm()
 
 import { OrganizationService, type Organization, type Domain, DomainService } from './services'
 
@@ -51,9 +59,32 @@ const refreshSecret = async (domainId: string) => {
   navigator.clipboard.writeText(secret!)
   emit('refreshed')
 }
+
+const deleteOrgDomain = (event: Event, type: 'domain' | 'org', id: string) => {
+  console.log(event, type, id)
+  confirm.require({
+    target: event.currentTarget as HTMLElement,
+    message: 'Do you want to delete this record?',
+    icon: 'pi pi-info-circle',
+    rejectProps: {
+      label: 'Cancel',
+      severity: 'secondary',
+      outlined: true
+    },
+    acceptProps: {
+      label: 'Delete',
+      severity: 'danger'
+    },
+    accept: () => {
+      toast.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted', life: 3000 })
+    }
+  })
+}
 </script>
 
 <template>
+  <Toast />
+  <ConfirmPopup></ConfirmPopup>
   <DataTable
     v-model:filters="filters"
     :value="data"
@@ -76,15 +107,29 @@ const refreshSecret = async (domainId: string) => {
     <template #empty> No items found. </template>
     <template #loading> Loading data. Please wait. </template>
 
-    <Column field="orgName" header="NAME" style="min-width: 10em">
+    <Column field="orgName" header="NAME" style="min-width: 10em" class="flex items-center gap-2">
       <template #body="{ data }">
         {{ data.orgName }}
+        <Button
+          icon="pi pi-trash"
+          aria-label="delete organization"
+          text
+          severity="danger"
+          @click="deleteOrgDomain($event, 'org', data.orgId)"
+        />
       </template>
     </Column>
 
     <Column field="hostName" header="DOMAIN" style="min-width: 10em">
       <template #body="{ data }">
         {{ data.hostName }}
+        <Button
+          icon="pi pi-trash"
+          aria-label="delete domain"
+          text
+          severity="danger"
+          @click="deleteOrgDomain($event, 'domain', data.domainId)"
+        />
       </template>
     </Column>
 
