@@ -12,6 +12,8 @@ import Toast from 'primevue/toast'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
 import ConfirmPopup from 'primevue/confirmpopup'
+import DomainForm from './DomainForm.vue'
+import Popover from 'primevue/popover'
 
 const toast = useToast()
 
@@ -27,39 +29,21 @@ const filters = ref({
 const loading = ref<boolean>()
 
 const emit = defineEmits(['copied', 'refreshed'])
-
+const orgId = ref<string>()
 const requestTable = async () => {
   loading.value = true
   const orgs: Organization[] = await OrganizationService.get()
   const domains: Domain[] = await DomainService.get()
-  const orgIdToNameMap: Record<string, string> = orgs.reduce(
-    (map, org) => {
-      map[org.orgId] = org.name
-      return map
-    },
-    {} as Record<string, string>
-  )
 
-  const mergedArray = domains.map((domain) => ({
-    hostName: domain.hostname,
-    domainId: domain.domainId,
-    orgId: domain.orgId,
-    orgName: orgIdToNameMap[domain.orgId || ''] || 'Unknown'
-  }))
-  orgs.forEach((org) => {
-    const orgHasDomain = mergedArray.some((entry) => entry.orgId === org.orgId)
-
-    if (!orgHasDomain) {
-      mergedArray.push({
-        hostName: '', // No domain associated
-        domainId: '', // No domain associated
-        orgId: org.orgId,
-        orgName: org.name
-      })
+  const result = orgs.map((org) => {
+    const relatedDomain = domains.find((domain) => domain.orgId === org.orgId)
+    return {
+      ...org,
+      ...relatedDomain
     }
   })
 
-  data.value = mergedArray
+  data.value = result
   loading.value = false
 }
 
@@ -107,11 +91,20 @@ const deleteOrgDomain = (event: Event, type: 'domain' | 'org', id: string) => {
     }
   })
 }
+const op = ref()
+
+const toggle = (event: Event, id: string) => {
+  orgId.value = id
+  op.value.toggle(event)
+}
 </script>
 
 <template>
   <Toast position="bottom-center" group="bc" />
   <ConfirmPopup></ConfirmPopup>
+  <Popover ref="op" :key="orgId">
+    <DomainForm :orgId="orgId" @copied="requestTable()" :key="orgId" />
+  </Popover>
   <DataTable
     v-model:filters="filters"
     :value="data"
@@ -119,7 +112,7 @@ const deleteOrgDomain = (event: Event, type: 'domain' | 'org', id: string) => {
     :rows="5"
     dataKey="title"
     :loading="loading"
-    :globalFilterFields="['orgName', 'hostName']"
+    :globalFilterFields="['name', 'hostname']"
   >
     <template #header>
       <div class="flex py-4 w-full">
@@ -134,9 +127,9 @@ const deleteOrgDomain = (event: Event, type: 'domain' | 'org', id: string) => {
     <template #empty> No items found. </template>
     <template #loading> Loading data. Please wait. </template>
 
-    <Column field="orgName" header="NAME" style="min-width: 10em" class="flex items-center gap-2">
+    <Column field="name" header="NAME" style="min-width: 10em" class="flex items-center gap-2">
       <template #body="{ data }">
-        {{ data.orgName }}
+        {{ data.name }}
         <Button
           icon="pi pi-trash"
           aria-label="delete organization"
@@ -147,9 +140,9 @@ const deleteOrgDomain = (event: Event, type: 'domain' | 'org', id: string) => {
       </template>
     </Column>
 
-    <Column field="hostName" header="DOMAIN" style="min-width: 10em">
+    <Column field="hostname" header="DOMAIN" style="min-width: 10em">
       <template #body="{ data }">
-        {{ data.hostName }}
+        {{ data.hostname }}
         <Button
           icon="pi pi-trash"
           aria-label="delete domain"
@@ -165,14 +158,14 @@ const deleteOrgDomain = (event: Event, type: 'domain' | 'org', id: string) => {
           severity="secondary"
           v-tooltip.top="'Create domain'"
           v-else
-          @click=""
+          @click="toggle($event, data.orgId)"
         />
       </template>
     </Column>
 
     <Column field="lagoon" header="LAGOON" style="min-width: 10em">
       <template #body="{ data }">
-        {{ data.orgName + ' lagoon' }}
+        {{ data.name + ' lagoon' }}
       </template>
     </Column>
 
