@@ -8,7 +8,8 @@ import AmplifyVue from '@aws-amplify/ui-vue'
 import Tooltip from 'primevue/tooltip'
 import '@/assets/main.css'
 import '@aws-amplify/ui-vue/styles.css'
-import { amplify } from './amplify'
+import { amplify } from './services'
+import ToastService from 'primevue/toastservice'
 
 const app = createApp(App)
 
@@ -17,6 +18,7 @@ amplify.configure()
 app.directive('tooltip', Tooltip)
 
 app.use(router)
+app.use(ToastService)
 
 app.use(AmplifyVue)
 
