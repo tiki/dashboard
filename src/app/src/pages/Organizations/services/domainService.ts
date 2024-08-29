@@ -27,4 +27,8 @@ export class DomainService {
   static async refreshSecret(domainId: string): Promise<Domain> {
     return await DomainService.requestService.put<Domain>(`/account/domain/${domainId}/secret`)
   }
+
+  static async delete(domainId: string): Promise<void> {
+    return await DomainService.requestService.delete<void>(`/account/domain/${domainId}`)
+  }
 }

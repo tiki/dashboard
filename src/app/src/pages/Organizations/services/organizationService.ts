@@ -17,4 +17,8 @@ export class OrganizationService {
   static async create(name: string): Promise<Organization> {
     return await OrganizationService.requestService.post<Organization>('/account/org', { name })
   }
+
+  static async delete(orgId: string): Promise<void> {
+    return await OrganizationService.requestService.delete<void>(`/account/org/${orgId}`)
+  }
 }
