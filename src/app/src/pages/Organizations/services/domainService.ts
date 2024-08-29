@@ -3,9 +3,10 @@ import { RequestService } from '@/services'
 export interface Domain {
   domainId: string
   hostname: string
-  secret: string
+  secret?: string
   created: string
   modified: string
+  orgId?: string
 }
 
 export class DomainService {

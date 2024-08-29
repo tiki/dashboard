@@ -2,6 +2,7 @@ import { auth, RequestService } from '@/services'
 
 export interface Organization {
   orgId: string
+  name: string
   modified: string
   created: string
 }
