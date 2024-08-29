@@ -18,12 +18,12 @@ onMounted(async () => {
 
 const isVisible = ref<boolean>(false)
 
-const secretCopied = () => {
+const secretCopied = (refreshed: boolean) => {
   toast.add({
     severity: 'success',
     summary: 'Success',
-    detail: 'Copied to clipboard',
-    life: 3000,
+    detail: !refreshed ? 'Copied to clipboard' : 'Token refreshed and copied to clipboard',
+    life: 5000,
     group: 'bc'
   })
 }
@@ -39,12 +39,12 @@ const secretCopied = () => {
         @click="isVisible = !isVisible"
       />
     </div>
-    <Organization-Table />
+    <Organization-Table @copied="secretCopied" @refreshed="secretCopied(true)" />
   </div>
   <New-Organization-Dialog
     :is-visible="isVisible"
     @update:visible="isVisible = !isVisible"
-    @copied="secretCopied"
+    @copied="secretCopied(false)"
   />
   <Toast position="bottom-center" group="bc" />
 </template>

@@ -19,4 +19,12 @@ export class DomainService {
   static async create(hostname: string, orgId: string): Promise<Domain> {
     return await DomainService.requestService.post<Domain>('/account/domain', { hostname, orgId })
   }
+
+  static async getSecret(domainId: string): Promise<Domain> {
+    return await DomainService.requestService.get<Domain>(`/account/domain/${domainId}?secret=true`)
+  }
+
+  static async refreshSecret(domainId: string): Promise<Domain> {
+    return await DomainService.requestService.put<Domain>(`/account/domain/${domainId}/secret`)
+  }
 }

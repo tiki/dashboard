@@ -18,6 +18,8 @@ const filters = ref({
 
 const loading = ref(true)
 
+const emit = defineEmits(['copied', 'refreshed'])
+
 onMounted(async () => {
   const orgs: Organization[] = await OrganizationService.get()
   const domains: Domain[] = await DomainService.get()
@@ -35,16 +37,19 @@ onMounted(async () => {
     orgName: orgIdToNameMap[domain.orgId || ''] || 'Unknown'
   }))
   data.value = mergedArray
-  console.log(mergedArray)
   loading.value = false
 })
 
-const copySecret = (domainId: string) => {
-  console.log(domainId)
+const copySecret = async (domainId: string) => {
+  const { secret } = await DomainService.getSecret(domainId)
+  navigator.clipboard.writeText(secret!)
+  emit('copied')
 }
 
-const refreshSecret = (domainId: string) => {
-  console.log(domainId)
+const refreshSecret = async (domainId: string) => {
+  const { secret } = await DomainService.refreshSecret(domainId)
+  navigator.clipboard.writeText(secret!)
+  emit('refreshed')
 }
 </script>
 
@@ -116,4 +121,3 @@ const refreshSecret = (domainId: string) => {
 </template>
 
 <style></style>
-./services/organizationService
