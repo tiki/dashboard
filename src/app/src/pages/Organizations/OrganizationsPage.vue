@@ -5,16 +5,9 @@ import NewOrganizationDialog from './OrganizationsDialog.vue'
 import Toast from 'primevue/toast'
 
 import { ref } from 'vue'
-import { auth } from '@/services'
-import { onMounted } from 'vue'
 import { useToast } from 'primevue/usetoast'
 
 const toast = useToast()
-
-onMounted(async () => {
-  const token = await auth.token()
-  console.log(token)
-})
 
 const isVisible = ref<boolean>(false)
 
