@@ -24,27 +24,27 @@ const navigationList = [
         route: 'account/organizations'
       }
     ]
-  },
-  {
-    header: 'data publishing',
-    children: [
-      {
-        name: 'datasets',
-        icon: 'pi pi-database mr-2',
-        route: 'data-publishing/datasets'
-      }
-    ]
-  },
-  {
-    header: 'messages',
-    children: [
-      {
-        name: 'my requests',
-        icon: 'pi pi-list mr-2',
-        route: 'messages/requests'
-      }
-    ]
   }
+  // {
+  //   header: 'data publishing',
+  //   children: [
+  //     {
+  //       name: 'datasets',
+  //       icon: 'pi pi-database mr-2',
+  //       route: 'data-publishing/datasets'
+  //     }
+  //   ]
+  // },
+  // {
+  //   header: 'messages',
+  //   children: [
+  //     {
+  //       name: 'my requests',
+  //       icon: 'pi pi-list mr-2',
+  //       route: 'messages/requests'
+  //     }
+  //   ]
+  // }
 ]
 </script>
 

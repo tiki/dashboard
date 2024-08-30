@@ -8,6 +8,16 @@ import DataTable from 'primevue/datatable'
 import InputText from 'primevue/inputtext'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
+import Toast from 'primevue/toast'
+import { useConfirm } from 'primevue/useconfirm'
+import { useToast } from 'primevue/usetoast'
+import ConfirmPopup from 'primevue/confirmpopup'
+import DomainForm from './DomainForm.vue'
+import Popover from 'primevue/popover'
+
+const toast = useToast()
+
+const confirm = useConfirm()
 
 import { OrganizationService, type Organization, type Domain, DomainService } from './services'
 
@@ -16,28 +26,29 @@ const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS }
 })
 
-const loading = ref(true)
+const loading = ref<boolean>()
 
 const emit = defineEmits(['copied', 'refreshed'])
-
-onMounted(async () => {
+const orgId = ref<string>()
+const requestTable = async () => {
+  loading.value = true
   const orgs: Organization[] = await OrganizationService.get()
   const domains: Domain[] = await DomainService.get()
-  const orgIdToNameMap: Record<string, string> = orgs.reduce(
-    (map, org) => {
-      map[org.orgId] = org.name
-      return map
-    },
-    {} as Record<string, string>
-  )
-  const mergedArray = domains.map((domain) => ({
-    hostName: domain.hostname,
-    domainId: domain.domainId,
-    orgId: domain.orgId,
-    orgName: orgIdToNameMap[domain.orgId || ''] || 'Unknown'
-  }))
-  data.value = mergedArray
+
+  const result = orgs.map((org) => {
+    const relatedDomain = domains.find((domain) => domain.orgId === org.orgId)
+    return {
+      ...org,
+      ...relatedDomain
+    }
+  })
+
+  data.value = result
   loading.value = false
+}
+
+onMounted(async () => {
+  await requestTable()
 })
 
 const copySecret = async (domainId: string) => {
@@ -51,9 +62,49 @@ const refreshSecret = async (domainId: string) => {
   navigator.clipboard.writeText(secret!)
   emit('refreshed')
 }
+
+const deleteOrgDomain = (event: Event, type: 'domain' | 'org', id: string) => {
+  confirm.require({
+    target: event.currentTarget as HTMLElement,
+    message: 'Do you want to delete this record?',
+    icon: 'pi pi-info-circle',
+    rejectProps: {
+      label: 'Cancel',
+      severity: 'secondary',
+      outlined: true
+    },
+    acceptProps: {
+      label: 'Delete',
+      severity: 'danger'
+    },
+    accept: async () => {
+      type === 'domain' ? await DomainService.delete(id) : await OrganizationService.delete(id)
+      toast.add({
+        severity: 'success',
+        summary: 'Confirmed',
+        detail: 'Record deleted',
+        life: 3000,
+        group: 'bc'
+      })
+
+      await requestTable()
+    }
+  })
+}
+const op = ref()
+
+const toggle = (event: Event, id: string) => {
+  orgId.value = id
+  op.value.toggle(event)
+}
 </script>
 
 <template>
+  <Toast position="bottom-center" group="bc" />
+  <ConfirmPopup></ConfirmPopup>
+  <Popover ref="op" :key="orgId">
+    <DomainForm :orgId="orgId" @copied="requestTable()" :key="orgId" />
+  </Popover>
   <DataTable
     v-model:filters="filters"
     :value="data"
@@ -61,7 +112,7 @@ const refreshSecret = async (domainId: string) => {
     :rows="5"
     dataKey="title"
     :loading="loading"
-    :globalFilterFields="['orgName', 'hostName']"
+    :globalFilterFields="['name', 'hostname']"
   >
     <template #header>
       <div class="flex py-4 w-full">
@@ -76,21 +127,45 @@ const refreshSecret = async (domainId: string) => {
     <template #empty> No items found. </template>
     <template #loading> Loading data. Please wait. </template>
 
-    <Column field="orgName" header="NAME" style="min-width: 10em">
+    <Column field="name" header="NAME" style="min-width: 10em" class="flex items-center gap-2">
       <template #body="{ data }">
-        {{ data.orgName }}
+        {{ data.name }}
+        <Button
+          icon="pi pi-trash"
+          aria-label="delete organization"
+          text
+          severity="danger"
+          @click="deleteOrgDomain($event, 'org', data.orgId)"
+        />
       </template>
     </Column>
 
-    <Column field="hostName" header="DOMAIN" style="min-width: 10em">
+    <Column field="hostname" header="DOMAIN" style="min-width: 10em">
       <template #body="{ data }">
-        {{ data.hostName }}
+        {{ data.hostname }}
+        <Button
+          icon="pi pi-trash"
+          aria-label="delete domain"
+          text
+          severity="danger"
+          v-if="data.domainId"
+          @click="deleteOrgDomain($event, 'domain', data.domainId)"
+        />
+        <Button
+          icon="pi pi-plus"
+          aria-label="create domain"
+          text
+          severity="secondary"
+          v-tooltip.top="'Create domain'"
+          v-else
+          @click="toggle($event, data.orgId)"
+        />
       </template>
     </Column>
 
     <Column field="lagoon" header="LAGOON" style="min-width: 10em">
       <template #body="{ data }">
-        {{ data.orgName + ' lagoon' }}
+        {{ data.name + ' lagoon' }}
       </template>
     </Column>
 

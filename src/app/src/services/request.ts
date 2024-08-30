@@ -3,7 +3,8 @@ import { auth } from './'
 export enum HttpClientBaseMehod {
   POST = 'POST',
   GET = 'GET',
-  PUT = 'PUT'
+  PUT = 'PUT',
+  DELETE = 'DELETE'
 }
 
 export default class RequestService {
@@ -17,7 +18,12 @@ export default class RequestService {
         `Error: ${response.status} ${response.statusText} - ${JSON.stringify(errorDetails)}`
       )
     }
-    return response.json()
+    const text = await response.text()
+
+    if (!text) {
+      return null as unknown as T
+    }
+    return JSON.parse(text)
   }
 
   // Method to get headers with token
@@ -69,5 +75,9 @@ export default class RequestService {
 
   public async put<T>(endpoint: string, body?: object): Promise<T> {
     return this.request<T>(endpoint, HttpClientBaseMehod.PUT, body)
+  }
+
+  public async delete<T>(endpoint: string): Promise<T> {
+    return this.request<T>(endpoint, HttpClientBaseMehod.DELETE)
   }
 }
