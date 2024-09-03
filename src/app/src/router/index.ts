@@ -46,8 +46,8 @@ const router = createRouter({
       name: 'data publishing',
       children: [
         {
-          path: 'start',
-          name: 'start',
+          path: 'getting-started',
+          name: 'getting started',
           component: GettingStartedPage
         },
         {

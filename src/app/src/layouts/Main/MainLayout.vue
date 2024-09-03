@@ -29,9 +29,9 @@ const navigationList = [
     header: 'data publishing',
     children: [
       {
-        name: 'Getting Started',
+        name: 'getting started',
         icon: 'pi pi-book mr-2',
-        route: 'data-publishing/start'
+        route: 'data-publishing/getting-started'
       },
       {
         name: 'lagoon',
