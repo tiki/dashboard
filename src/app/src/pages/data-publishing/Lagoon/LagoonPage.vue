@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import LagoonTable from './LagoonTable.vue'
 import Button from 'primevue/button'
+import DeployLagoonDialog from './DeployLagoonDialog.vue'
+
+const isVisible = ref<boolean>(false)
 </script>
 
 <template>
@@ -10,6 +14,7 @@ import Button from 'primevue/button'
       <Button label="Deploy" style="background-color: #00b272" @click="isVisible = !isVisible" />
     </div>
     <LagoonTable />
+    <DeployLagoonDialog :isVisible="isVisible" @update:visible="isVisible = !isVisible" />
   </div>
 </template>
 
