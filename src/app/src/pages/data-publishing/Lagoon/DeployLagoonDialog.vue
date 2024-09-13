@@ -9,6 +9,7 @@ import { onMounted, ref } from 'vue'
 
 import { useLoading } from '@/services'
 import { type Organization, OrganizationService } from '@/pages/account/Organizations/services'
+import { LagoonService } from './services/lagoonService'
 
 defineProps({
   isVisible: {
@@ -21,6 +22,7 @@ const { isLoading: isSubmitting, withLoading } = useLoading()
 
 const selectedOrganization = ref<string>()
 const organizations = ref<Organization[]>([])
+const error = ref<string>()
 
 const requestTable = async () => {
   organizations.value = await OrganizationService.get()
@@ -31,8 +33,9 @@ onMounted(async () => {
   await requestTable()
 })
 
-const onSubmit = () => {
-  console.log('test', selectedOrganization.value)
+const onSubmit = async () => {
+  if (!selectedOrganization.value) return (error.value = 'You must choose an Organization')
+  await LagoonService.deploy(selectedOrganization.value)
 }
 </script>
 
@@ -47,6 +50,9 @@ const onSubmit = () => {
           placeholder="Select the organization"
           class="w-full"
         />
+        <Message severity="error" class="w-full flex justify-center items-center" v-if="error">{{
+          error
+        }}</Message>
         <Button
           label="Submit"
           severity="success"

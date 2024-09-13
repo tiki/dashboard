@@ -6,8 +6,10 @@ import InputIcon from 'primevue/inputicon'
 import DataTable from 'primevue/datatable'
 import InputText from 'primevue/inputtext'
 import Column from 'primevue/column'
+import { type Lagoon, LagoonService } from './services/lagoonService'
+import LoadingComponent from '@/components/LoadingComponent.vue'
 
-const data = ref()
+const data = ref<Lagoon[]>()
 const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS }
 })
@@ -19,7 +21,11 @@ onMounted(async () => {
 })
 
 const getLagoon = async () => {
-  return []
+  try {
+    return await LagoonService.get()
+  } catch (error) {
+    console.log(error)
+  }
 }
 </script>
 
@@ -32,7 +38,7 @@ const getLagoon = async () => {
       :rows="10"
       dataKey="title"
       :loading="loading"
-      :globalFilterFields="['table', 'dataset', 'status']"
+      :globalFilterFields="['orgName', 'lagoonId', 'status']"
     >
       <template #header>
         <div class="flex py-4 w-full">
@@ -45,38 +51,25 @@ const getLagoon = async () => {
         </div>
       </template>
       <template #empty> No items found. </template>
-      <template #loading> Loading data. Please wait. </template>
+      <template #loading>
+        <LoadingComponent />
+      </template>
 
-      <Column field="table" header="TABLE" style="min-width: 10rem">
+      <Column field="lagoonId" header="LAGOON ID" style="min-width: 10rem">
         <template #body="{ data }">
-          {{ data.table }}
-        </template>
-      </Column>
-
-      <Column field="database" header="DATABASE" style="min-width: 10rem">
-        <template #body="{ data }">
-          {{ data.database }}
+          {{ data.lagoonId }}
         </template>
       </Column>
 
-      <Column field="filename" header="FILENAME" :showFilterMenu="false" style="min-width: 10em">
+      <Column field="orgName" header="ORGANIZATION" style="min-width: 10rem">
         <template #body="{ data }">
-          {{ data.filename }}
+          {{ data.orgName }}
         </template>
       </Column>
-      <Column field="lagoon" header="LAGOON" :showFilterMenu="false" style="min-width: 10em">
+
+      <Column field="status" header="STATUS" :showFilterMenu="false" style="min-width: 10em">
         <template #body="{ data }">
-          {{ data.lagoon }}
-        </template>
-      </Column>
-      <Column
-        field="uploaded_datetime"
-        header="UPLOADED DATETIME"
-        style="min-width: 10rem"
-        sortable
-      >
-        <template #body="{ data }">
-          {{ data.uploaded_datetime }}
+          {{ data.status }}
         </template>
       </Column>
     </DataTable>

@@ -14,6 +14,7 @@ import { useToast } from 'primevue/usetoast'
 import ConfirmPopup from 'primevue/confirmpopup'
 import DomainForm from './DomainForm.vue'
 import Popover from 'primevue/popover'
+import LoadingComponent from '@/components/LoadingComponent.vue'
 
 const toast = useToast()
 
@@ -125,7 +126,7 @@ const toggle = (event: Event, id: string) => {
       </div>
     </template>
     <template #empty> No items found. </template>
-    <template #loading> Loading data. Please wait. </template>
+    <template #loading> <LoadingComponent /> </template>
 
     <Column field="name" header="NAME" style="min-width: 10em" class="flex items-center gap-2">
       <template #body="{ data }">

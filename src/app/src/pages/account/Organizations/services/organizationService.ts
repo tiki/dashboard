@@ -1,4 +1,4 @@
-import { auth, RequestService } from '@/services'
+import { RequestService } from '@/services'
 
 export interface Organization {
   orgId: string
