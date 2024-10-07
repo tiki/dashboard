@@ -24,17 +24,27 @@ const navigationList = [
         route: 'account/organizations'
       }
     ]
+  },
+  {
+    header: 'data publishing',
+    children: [
+      {
+        name: 'getting started',
+        icon: 'pi pi-book mr-2',
+        route: 'data-publishing/getting-started'
+      },
+      {
+        name: 'lagoon',
+        icon: 'pi pi-cloud mr-2',
+        route: 'data-publishing/lagoon'
+      },
+      {
+        name: 'datasets',
+        icon: 'pi pi-database mr-2',
+        route: 'data-publishing/datasets'
+      }
+    ]
   }
-  // {
-  //   header: 'data publishing',
-  //   children: [
-  //     {
-  //       name: 'datasets',
-  //       icon: 'pi pi-database mr-2',
-  //       route: 'data-publishing/datasets'
-  //     }
-  //   ]
-  // },
   // {
   //   header: 'messages',
   //   children: [
