@@ -3,6 +3,7 @@ import { useToast } from 'primevue/usetoast'
 import FileUpload from 'primevue/fileupload'
 import Button from 'primevue/button'
 import Toast from 'primevue/toast'
+import ButtonsFooter from './ButtonsFooter.vue'
 
 const toast = useToast()
 defineProps({
@@ -33,15 +34,11 @@ const onAdvancedUpload = () => {
         <span>Drag and drop files to here to upload.</span>
       </template>
     </FileUpload>
-    <div class="flex justify-between">
-      <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="$emit('back')" />
-      <Button
-        label="Next"
-        icon="pi pi-arrow-right"
-        iconPos="right"
-        @click="$emit('next')"
-        v-if="step !== 3"
-      />
-    </div>
+    <ButtonsFooter
+      :hasBack="true"
+      :hasNext="step === 4 ? false : true"
+      @next="$emit('next')"
+      @back="$emit('back')"
+    />
   </div>
 </template>

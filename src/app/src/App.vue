@@ -2,14 +2,11 @@
 import { RouterView } from 'vue-router'
 import MainLayout from './layouts/Main/MainLayout.vue'
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-vue'
-import ReportFormPage from '@/pages/report-form/ReportFormPage.vue'
 
 const auth = useAuthenticator()
 import { useRoute } from 'vue-router'
 
 const currentRoute = useRoute()
-
-console.log(currentRoute.path)
 </script>
 
 <template>
