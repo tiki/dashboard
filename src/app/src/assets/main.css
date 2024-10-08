@@ -11,6 +11,10 @@
   @tailwind utilities;
 }
 
+* {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+}
+
 [data-amplify-authenticator] {
   --amplify-components-button-primary-background-color: #00b272;
   --amplify-components-fieldcontrol-focus-box-shadow: #00b272;
