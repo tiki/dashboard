@@ -23,11 +23,10 @@ const onAdvancedUpload = () => {
   <div class="flex flex-col gap-4">
     <Toast />
     <FileUpload
-      name="demo[]"
+      name="dataReportFiles[]"
       url="/api/upload"
       @upload="onAdvancedUpload()"
       :multiple="true"
-      accept=".pdf"
       :maxFileSize="1000000"
     >
       <template #empty>
