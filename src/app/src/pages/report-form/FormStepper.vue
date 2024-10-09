@@ -5,13 +5,28 @@ import StepPanels from 'primevue/steppanels'
 import Step from 'primevue/step'
 import StepPanel from 'primevue/steppanel'
 import ProgressDialog from './ProgressDialog.vue'
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 import StepOne from './StepOne.vue'
 import UploadFileStep from './UploadFileStep.vue'
 import StepTwo from './StepTwo.vue'
+import type FormReq from './types/formReq'
+
+const reqData = reactive<FormReq>({
+  name: '',
+  companyName: '',
+  email: '',
+  website: '',
+  dataSamples: [],
+  legalDocuments: []
+})
 
 const isVisible = ref<boolean>(false)
+
+const updateData = (data: FormReq) => {
+  Object.assign(reqData, data)
+  isVisible.value = true
+}
 </script>
 
 <template>
@@ -32,8 +47,8 @@ const isVisible = ref<boolean>(false)
           <StepTwo
             @back="activateCallback('1')"
             @next="
-              () => {
-                isVisible = true
+              (data: FormReq) => {
+                updateData(data)
                 activateCallback('3')
               }
             "
