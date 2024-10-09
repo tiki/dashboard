@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import RequestsPage from '../pages/Requests/RequestsPage.vue'
-import ThreadPage from '../pages/Requests/RequestsThreadPage.vue'
+import RequestsPage from '../pages/requests/RequestsPage.vue'
+import ThreadPage from '../pages/requests/RequestsThreadPage.vue'
 import DatasetsPage from '../pages/data-publishing/Datasets/DatasetsPage.vue'
 import OrganizationPage from '../pages/account/Organizations/OrganizationsPage.vue'
 import GettingStartedPage from '@/pages/data-publishing/GettingStarted/GettingStartedPage.vue'
 import LagoonPage from '@/pages/data-publishing/Lagoon/LagoonPage.vue'
+import ReportFormPage from '@/pages/report-form/ReportFormPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +14,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       redirect: { name: 'organizations' }
+    },
+    {
+      path: '/report-form',
+      name: 'report form',
+      component: ReportFormPage
     },
     {
       path: '/messages',
