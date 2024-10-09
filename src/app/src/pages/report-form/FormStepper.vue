@@ -27,6 +27,10 @@ const updateData = (data: FormReq) => {
   Object.assign(reqData, data)
   isVisible.value = true
 }
+
+const submit = () => {
+  console.log(reqData)
+}
 </script>
 
 <template>
@@ -58,6 +62,11 @@ const updateData = (data: FormReq) => {
           <UploadFileStep
             :step="3"
             @back="activateCallback('2')"
+            @upload="
+              (data: File[]) => {
+                reqData.dataSamples = data
+              }
+            "
             @next="
               () => {
                 isVisible = true
@@ -67,7 +76,12 @@ const updateData = (data: FormReq) => {
           />
         </StepPanel>
         <StepPanel v-slot="{ activateCallback }" value="4">
-          <UploadFileStep :step="4" @back="activateCallback('3')" />
+          <UploadFileStep
+            :step="4"
+            @back="activateCallback('3')"
+            @upload="(data: File[]) => (reqData.legalDocuments = data)"
+            @next="submit"
+          />
         </StepPanel>
       </StepPanels>
     </Stepper>

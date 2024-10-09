@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
 import FileUpload from 'primevue/fileupload'
-import Button from 'primevue/button'
+import { ref } from 'vue'
 import Toast from 'primevue/toast'
 import ButtonsFooter from './ButtonsFooter.vue'
 
@@ -13,10 +13,18 @@ defineProps({
   }
 })
 
-defineEmits(['back', 'next'])
+const emit = defineEmits(['back', 'next', 'upload'])
 
-const onAdvancedUpload = () => {
-  toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 })
+const dataSamples = ref<File[]>([])
+
+const onFileSelect = (event: any) => {
+  const file = event.files[0]
+  dataSamples.value.push(file)
+}
+
+const onUpload = () => {
+  emit('upload', dataSamples.value)
+  toast.add({ severity: 'success', summary: 'Success', detail: 'Files Uploaded', life: 3000 })
 }
 </script>
 
@@ -25,8 +33,10 @@ const onAdvancedUpload = () => {
     <Toast />
     <FileUpload
       name="dataReportFiles[]"
-      url="/api/upload"
-      @upload="onAdvancedUpload()"
+      @select="onFileSelect"
+      @upload="onUpload"
+      :customUpload="true"
+      @uploader="onUpload"
       :multiple="true"
       :maxFileSize="1000000"
     >
@@ -36,7 +46,7 @@ const onAdvancedUpload = () => {
     </FileUpload>
     <ButtonsFooter
       :hasBack="true"
-      :hasNext="step === 4 ? false : true"
+      :isSubmit="step === 4"
       @next="$emit('next')"
       @back="$emit('back')"
     />

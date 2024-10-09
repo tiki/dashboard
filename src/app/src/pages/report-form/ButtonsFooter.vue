@@ -5,9 +5,9 @@ defineProps({
     type: Boolean,
     required: true
   },
-  hasNext: {
+  isSubmit: {
     type: Boolean,
-    required: true
+    required: false
   }
 })
 defineEmits(['back', 'next'])
@@ -27,9 +27,8 @@ defineEmits(['back', 'next'])
 
     <div class="w-1/2 text-right">
       <Button
-        v-if="hasNext"
-        label="Next"
-        icon="pi pi-arrow-right"
+        :label="isSubmit ? 'Submit' : 'Next'"
+        :icon="isSubmit ? 'pi pi-check' : 'pi pi-arrow-right'"
         iconPos="right"
         @click="$emit('next')"
       />

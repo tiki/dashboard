@@ -56,6 +56,6 @@ const onNext = () => {
       <label for="website">Website Url</label>
     </FloatLabel>
     <Message severity="error" v-if="error">{{ error }}</Message>
-    <ButtonsFooter :hasBack="true" :hasNext="true" @next="onNext" @back="$emit('back')" />
+    <ButtonsFooter :hasBack="true" @next="onNext" @back="$emit('back')" />
   </form>
 </template>
