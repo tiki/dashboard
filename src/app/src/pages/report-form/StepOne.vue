@@ -7,20 +7,34 @@ defineEmits(['next'])
 <template>
   <div class="flex flex-col gap-8">
     <div class="flex flex-col gap-4">
-      <h1 class="text-3xl font-bold">Requiments (you)</h1>
+      <h1 class="text-3xl font-bold">Your Responsibilities</h1>
       <ul class="list-disc leading-8 px-8 text-lg font-normal">
-        <li>Sign Evaluation agreement to share data for eval-only, non-commercial purpose.</li>
-        <li>A very small set of sample data (~100 records).</li>
-        <li>Any applicable legal agreements, ToS, privacy policy, etc.</li>
+        <li>
+          Sign the Evaluation Agreement, allowing us to use your data solely for non-commercial
+          evaluation purposes.
+        </li>
+        <li>
+          Submit a small sample dataset (~100 records recommended). You can upload multiple files in
+          the section three.
+        </li>
+        <li>
+          Provide any relevant legal documents, such as Terms of Service, privacy policies, or other
+          applicable agreements.
+        </li>
       </ul>
     </div>
     <div class="flex flex-col gap-4">
-      <h1 class="text-3xl font-bold">Deliverables (us)</h1>
+      <h1 class="text-3xl font-bold">Our Deliverables</h1>
       <ul class="list-disc leading-8 px-8 text-lg font-normal">
-        <li>Data taxonomy and docs derived from the sample data.</li>
-        <li>Legal review of agreements from a data commercialization lens.</li>
-        <li>Survey our data buyer network to gauge interest.</li>
-        <li>Review of competitors, pricing, and market requirements.</li>
+        <li>
+          Detailed data taxonomy and accompanying documentation derived from your sample data.
+        </li>
+        <li>
+          A legal review of your provided agreements, with a focus on data commercialization
+          potential.
+        </li>
+        <li>Insights from our data buyer network, gauging interest in your data offering.</li>
+        <li>A thorough review of competitors, pricing strategies, and key market requirements.</li>
       </ul>
     </div>
     <ButtonsFooter :hasBack="false" :hasNext="true" @next="$emit('next')" />
