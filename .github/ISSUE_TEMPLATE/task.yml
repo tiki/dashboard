@@ -1,4 +1,4 @@
-name: Story Task
+name: Task
 description: Advanced! Leave this to the maintainers.
 labels:
   - task
@@ -8,10 +8,10 @@ body:
       value: |
         ### Time to get technical.
   - type: input
-    id: story
+    id: deliverable
     attributes:
-      label: User Story
-      description: Add the story this task belongs to.
+      label: Deliverable
+      description: Add the deliverable this task belongs to.
     validations:
       required: true
   - type: textarea
@@ -28,3 +28,5 @@ body:
       description: Add any specific criteria required before marking as complete
       placeholder: |
         - [ ] criteria 1
+    validations:
+      required: true
