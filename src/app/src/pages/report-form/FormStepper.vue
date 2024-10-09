@@ -36,12 +36,12 @@ const submit = () => {
 <template>
   <div class="card flex justify-center">
     <ProgressDialog :is-visible="isVisible" @update:visible="isVisible = !isVisible" />
-    <Stepper value="1" class="basis-auto flex-col">
+    <Stepper value="1" class="basis-auto flex-col" linear>
       <StepList class="flex flex-col sm:flex-row">
-        <Step value="1" :disabled="true">Getting Started</Step>
-        <Step value="2" :disabled="true">Company Information</Step>
-        <Step value="3" :disabled="true">Data Samples</Step>
-        <Step value="4" :disabled="true">Legal Documentation</Step>
+        <Step value="1">Getting Started</Step>
+        <Step value="2">Company Information</Step>
+        <Step value="3">Data Samples</Step>
+        <Step value="4">Legal Documentation</Step>
       </StepList>
       <StepPanels>
         <StepPanel v-slot="{ activateCallback }" value="1">
