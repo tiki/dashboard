@@ -1,15 +1,40 @@
 <script setup lang="ts">
 import InputText from 'primevue/inputtext'
 import FloatLabel from 'primevue/floatlabel'
+import Message from 'primevue/message'
+
 import ButtonsFooter from './ButtonsFooter.vue'
+
 import { ref } from 'vue'
 
-defineEmits(['next', 'back'])
+const emits = defineEmits(['next', 'back'])
+
+const error = ref<string>('')
 
 const name = ref<string>('')
 const companyName = ref<string>('')
 const email = ref<string>('')
 const website = ref<string>('')
+
+const validateForm = () => {
+  if (!name.value || !companyName.value || !email.value || !website.value) {
+    return false
+  }
+  return true
+}
+
+const onNext = () => {
+  if (validateForm()) {
+    const data = {
+      name: name.value,
+      companyName: companyName.value,
+      email: email.value,
+      website: website.value
+    }
+    return emits('next', data)
+  }
+  return (error.value = 'All fields are required!')
+}
 </script>
 
 <template>
@@ -30,6 +55,7 @@ const website = ref<string>('')
       <InputText id="website" class="w-full" v-model="website" />
       <label for="website">Website Url</label>
     </FloatLabel>
-    <ButtonsFooter :hasBack="true" :hasNext="true" @next="$emit('next')" @back="$emit('back')" />
+    <Message severity="error" v-if="error">{{ error }}</Message>
+    <ButtonsFooter :hasBack="true" @next="onNext" @back="$emit('back')" />
   </form>
 </template>

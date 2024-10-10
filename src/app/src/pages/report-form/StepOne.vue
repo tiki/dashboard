@@ -37,6 +37,6 @@ defineEmits(['next'])
         <li>A thorough review of competitors, pricing strategies, and key market requirements.</li>
       </ul>
     </div>
-    <ButtonsFooter :hasBack="false" :hasNext="true" @next="$emit('next')" />
+    <ButtonsFooter :hasBack="false" @next="$emit('next')" />
   </div>
 </template>
