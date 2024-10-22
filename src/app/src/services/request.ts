@@ -42,10 +42,11 @@ export default class RequestService {
   protected async request<T>(
     endpoint: string,
     method: HttpClientBaseMehod,
-    body?: object
+    body?: object,
+    authenticated: boolean = true
   ): Promise<T> {
     const url = `${this._apiUrl}${endpoint}`
-    const headers = await this.getHeaders()
+    const headers = authenticated ? await this.getHeaders() : new Headers()
 
     const options: RequestInit = {
       method: method,
@@ -68,8 +69,8 @@ export default class RequestService {
   }
 
   // Public method to make POST requests
-  public async post<T>(endpoint: string, body: object): Promise<T> {
-    return this.request<T>(endpoint, HttpClientBaseMehod.POST, body)
+  public async post<T>(endpoint: string, body: object, authenticated: boolean = true): Promise<T> {
+    return this.request<T>(endpoint, HttpClientBaseMehod.POST, body, authenticated)
   }
 
   public async put<T>(endpoint: string, body?: object): Promise<T> {

@@ -35,7 +35,7 @@ export class ReportService {
         })
       }
 
-      return await ReportService.requestService.post<any>('/account/report', formData)
+      return await ReportService.requestService.post<any>('/account/report', formData, false)
     } catch (error) {
       console.error('Error submitting form:', error)
     }
