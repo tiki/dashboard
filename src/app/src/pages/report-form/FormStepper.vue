@@ -11,6 +11,7 @@ import StepOne from './StepOne.vue'
 import UploadFileStep from './UploadFileStep.vue'
 import StepTwo from './StepTwo.vue'
 import type FormReq from './types/formReq'
+import { ReportService } from './services/reportService'
 
 const reqData = reactive<FormReq>({
   name: '',
@@ -25,11 +26,10 @@ const isVisible = ref<boolean>(false)
 
 const updateData = (data: FormReq) => {
   Object.assign(reqData, data)
-  isVisible.value = true
 }
 
-const submit = () => {
-  console.log(reqData)
+const submit = async () => {
+  await ReportService.submitForm(reqData)
 }
 </script>
 
@@ -69,7 +69,6 @@ const submit = () => {
             "
             @next="
               () => {
-                isVisible = true
                 activateCallback('4')
               }
             "

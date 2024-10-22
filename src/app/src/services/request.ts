@@ -32,7 +32,6 @@ export default class RequestService {
     try {
       const token = await auth.token()
       headers.append('Authorization', 'Bearer ' + token)
-      headers.append('Content-Type', 'application/json')
     } catch (error) {
       throw new Error('Unable to retrieve authentication token')
     }
