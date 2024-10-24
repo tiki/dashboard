@@ -23,9 +23,9 @@ watch(
 </script>
 
 <template>
-  <div class="flex justify-center p-[4.5rem] items-center h-screen">
+  <div class="flex justify-center sm:p-[4.5rem] items-center h-screen">
     <AuthInfo />
-    <div class="flex flex-col p-[3.5rem] items-start justify-start gap-[2.625rem] flex-1">
+    <div class="flex flex-col sm:p-[3.5rem] sm:items-start justify-start gap-[2.625rem] flex-1">
       <authenticator
         :sign-up-attributes="['given_name', 'family_name']"
         :social-providers="['amazon', 'google']"

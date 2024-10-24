@@ -23,7 +23,9 @@ const features = [
 </script>
 
 <template>
-  <div class="flex flex-col items-start justify-center gap-[2.1875rem] p-14 flex-1 self-stretch">
+  <div
+    class="hidden sm:flex flex-col items-start justify-center gap-[2.1875rem] p-14 flex-1 self-stretch"
+  >
     <img src="../../assets/images/beehiv-logo.svg" alt="" class="" />
     <div class="flex flex-col items-start gap-[0.4375rem] self-stretch">
       <h1 class="text-[1.09375rem] font-semibold text-[#1C0000]">Welcome to Tiki</h1>
