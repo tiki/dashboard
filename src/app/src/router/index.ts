@@ -6,19 +6,38 @@ import OrganizationPage from '../pages/account/Organizations/OrganizationsPage.v
 import GettingStartedPage from '@/pages/data-publishing/GettingStarted/GettingStartedPage.vue'
 import LagoonPage from '@/pages/data-publishing/Lagoon/LagoonPage.vue'
 import ReportFormPage from '@/pages/report-form/ReportFormPage.vue'
+import AuthenticatorPage from '@/pages/authenticator/AuthenticatorPage.vue'
+
+import { useAuthenticator } from '@aws-amplify/ui-vue'
+
+const auth = useAuthenticator()
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      redirect: { name: 'organizations' }
+      path: '/login',
+      name: 'login',
+      component: AuthenticatorPage,
+      meta: {
+        requiresAuth: false
+      }
     },
     {
       path: '/report-form',
       name: 'report form',
-      component: ReportFormPage
+      component: ReportFormPage,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/',
+      name: 'home',
+      redirect: { name: 'organizations' },
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/messages',
@@ -27,12 +46,18 @@ const router = createRouter({
         {
           path: 'requests',
           name: 'my requests',
-          component: RequestsPage
+          component: RequestsPage,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: 'request/:id',
           name: 'request',
-          component: ThreadPage
+          component: ThreadPage,
+          meta: {
+            requiresAuth: true
+          }
         }
       ]
     },
@@ -43,7 +68,10 @@ const router = createRouter({
         {
           path: 'organizations',
           name: 'organizations',
-          component: OrganizationPage
+          component: OrganizationPage,
+          meta: {
+            requiresAuth: true
+          }
         }
       ]
     },
@@ -54,21 +82,39 @@ const router = createRouter({
         {
           path: 'getting-started',
           name: 'getting started',
-          component: GettingStartedPage
+          component: GettingStartedPage,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: 'lagoon',
           name: 'lagoon',
-          component: LagoonPage
+          component: LagoonPage,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: 'datasets',
           name: 'datasets',
-          component: DatasetsPage
+          component: DatasetsPage,
+          meta: {
+            requiresAuth: true
+          }
         }
       ]
     }
   ]
+})
+
+router.beforeEach((to) => {
+  if (to.meta.requiresAuth && auth.route !== 'authenticated') {
+    return {
+      path: '/login',
+      query: { redirect: to.fullPath }
+    }
+  }
 })
 
 export default router

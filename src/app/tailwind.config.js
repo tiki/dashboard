@@ -9,7 +9,8 @@ module.exports = {
         'yellow-light': '#FFF0BC',
         'tiki-gray': '#505C59',
         'dark-blue': '#334155',
-        'tiki-green': '#00B272'
+        'tiki-green': '#00B272',
+        'tiki-black': '#1C0000'
       }
     }
   },
