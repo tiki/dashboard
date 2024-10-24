@@ -40,15 +40,16 @@ watch(
 [data-amplify-authenticator] {
   --amplify-components-input-border-color: #1c0000;
   --amplify-components-input-border-width: 2px;
+  --amplify-components-authenticator-router-border-color: #e5e5e5;
 }
 .amplify-input {
-  border-radius: 0.375rem !important;
   border: 1px solid #e5e5e5 !important;
 }
+
 .amplify-field-group__outer-end button {
-  border-radius: 0.375rem !important;
   border: 1px solid #e5e5e5 !important;
   border-left: 0;
+  border-left: 0 !important;
 }
 
 .amplify-authenticator__federated-button {
@@ -75,6 +76,7 @@ watch(
   font-size: 2rem !important;
   font-weight: 700 !important;
   color: #1c0000 !important;
+  margin-bottom: 2rem !important;
 }
 .amplify-icon {
   color: #00b272 !important;
