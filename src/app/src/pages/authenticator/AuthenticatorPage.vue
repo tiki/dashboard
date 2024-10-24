@@ -23,13 +23,15 @@ watch(
 </script>
 
 <template>
-  <div class="flex justify-center sm:p-[4.5rem] items-center h-screen">
-    <AuthInfo />
-    <div class="flex flex-col sm:p-[3.5rem] sm:items-start justify-start gap-[2.625rem] flex-1">
-      <authenticator
-        :sign-up-attributes="['given_name', 'family_name']"
-        :social-providers="['amazon', 'google']"
-      ></authenticator>
+  <div class="h-screen flex items-center justify-center">
+    <div class="flex justify-center sm:p-[4.5rem] items-start h-auto">
+      <AuthInfo />
+      <div class="flex flex-col sm:p-[3.5rem] sm:items-start justify-start flex-1">
+        <authenticator
+          :sign-up-attributes="['given_name', 'family_name']"
+          :social-providers="['amazon', 'google']"
+        ></authenticator>
+      </div>
     </div>
   </div>
 </template>
@@ -40,11 +42,12 @@ watch(
   --amplify-components-input-border-width: 2px;
 }
 .amplify-input {
-  border-width: 2px !important;
+  border-radius: 0.375rem !important;
+  border: 1px solid #e5e5e5 !important;
 }
 .amplify-field-group__outer-end button {
-  border-width: 2px !important;
-  border-color: #1c0000 !important;
+  border-radius: 0.375rem !important;
+  border: 1px solid #e5e5e5 !important;
   border-left: 0;
 }
 
@@ -70,7 +73,17 @@ watch(
 .amplify-heading--3 {
   text-align: center !important;
   font-size: 2rem !important;
-  font-weight: 800 !important;
-  color: var(--Dark-Gray, #505c59) !important;
+  font-weight: 700 !important;
+  color: #1c0000 !important;
+}
+.amplify-icon {
+  color: #00b272 !important;
+}
+#signIn-panel {
+  padding-bottom: 0 !important;
+}
+
+[data-amplify-footer] {
+  margin-bottom: 4.31rem;
 }
 </style>

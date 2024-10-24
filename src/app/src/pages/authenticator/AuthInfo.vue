@@ -24,7 +24,7 @@ const features = [
 
 <template>
   <div
-    class="hidden sm:flex flex-col items-start justify-center gap-[2.1875rem] p-14 flex-1 self-stretch"
+    class="hidden sm:flex flex-col items-start justify-start gap-[2.1875rem] p-14 flex-1 self-stretch"
   >
     <img src="../../assets/images/beehiv-logo.svg" alt="" class="" />
     <div class="flex flex-col items-start gap-[0.4375rem] self-stretch">
@@ -33,7 +33,7 @@ const features = [
         Unlock your most valuable asset.
       </p>
     </div>
-    <div class="flex flex-col items-start gap-[1.3125rem] self-stretch">
+    <div class="flex flex-col items-start gap-[1.3125rem] self-stretch mb-[15rem]">
       <InfoFeature v-for="feature in features" :key="feature.title" v-bind="feature" />
     </div>
   </div>

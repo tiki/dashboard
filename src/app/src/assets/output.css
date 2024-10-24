@@ -627,6 +627,14 @@ video {
     margin-top: auto;
   }
 
+  .mb-\[17\.31rem\]{
+    margin-bottom: 17.31rem;
+  }
+
+  .mb-\[15rem\]{
+    margin-bottom: 15rem;
+  }
+
   .block{
     display: block;
   }
@@ -657,6 +665,14 @@ video {
 
   .h-\[900px\]{
     height: 900px;
+  }
+
+  .h-auto{
+    height: auto;
+  }
+
+  .h-\[46rem\]{
+    height: 46rem;
   }
 
   .w-1\/12{
