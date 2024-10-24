@@ -1,6 +1,25 @@
 <script setup lang="ts">
-import { Authenticator } from '@aws-amplify/ui-vue'
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-vue'
 import AuthInfo from './AuthInfo.vue'
+import { toRefs, watch } from 'vue'
+import { useRouter } from 'vue-router'
+
+const { route } = toRefs(useAuthenticator())
+
+const router = useRouter()
+
+watch(
+  () => route.value,
+  (route) => {
+    if (route === 'authenticated') {
+      const queryString = window.location.search
+      const urlParams = new URLSearchParams(queryString)
+      const redirect = urlParams.get('redirect')
+      const routeToPush = redirect ?? '/'
+      router.push(routeToPush)
+    }
+  }
+)
 </script>
 
 <template>

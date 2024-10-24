@@ -110,6 +110,7 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   if (to.meta.requiresAuth && auth.route !== 'authenticated') {
+    auth.signOut()
     return {
       path: '/login',
       query: { redirect: to.fullPath }
