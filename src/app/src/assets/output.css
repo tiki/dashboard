@@ -651,6 +651,10 @@ video {
     height: 2.375rem;
   }
 
+  .h-\[900px\]{
+    height: 900px;
+  }
+
   .w-1\/12{
     width: 8.333333%;
   }

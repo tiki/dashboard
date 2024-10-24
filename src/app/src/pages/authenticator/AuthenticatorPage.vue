@@ -33,3 +33,44 @@ watch(
     </div>
   </div>
 </template>
+
+<style>
+[data-amplify-authenticator] {
+  --amplify-components-input-border-color: #1c0000;
+  --amplify-components-input-border-width: 2px;
+}
+.amplify-input {
+  border-width: 2px !important;
+}
+.amplify-field-group__outer-end button {
+  border-width: 2px !important;
+  border-color: #1c0000 !important;
+  border-left: 0;
+}
+
+.amplify-authenticator__federated-button {
+  border-width: 2px !important;
+  border-color: #1c0000 !important;
+  font-weight: 800 !important;
+  color: #1c0000 !important;
+  font-size: 1rem !important;
+}
+
+.amplify-button--link {
+  color: #00b272 !important;
+  height: 1.1875rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 800 !important;
+}
+
+.amplify-button--link:hover {
+  background-color: white !important;
+}
+
+.amplify-heading--3 {
+  text-align: center !important;
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  color: var(--Dark-Gray, #505c59) !important;
+}
+</style>
